@@ -5,6 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class UserPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
+  componentDidMount(){this.props.dispatch({type: 'GET_HERD'})}
   render() {
     return (
       <div>

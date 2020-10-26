@@ -77,4 +77,14 @@ router.post('/calf', (req, res) => {
   })
 });//end post route to /api/animal/cow
 
+
+//post route to /api/animal/note this is used to add a note to an animal
+router.post('/note', (req, res) => {
+  let queryText = `INSERT INTO "notes" ("note", "animal_id") VALUES ($1, $2)`
+  pool.query(queryText, [req.body.note, req.body.animal_id]).then(result => res.sendStatus(201)).catch(e => {
+    console.log('error posting note', e);
+    res.sendStatus(500);
+  })
+});//end post route to /api/animal/note
+
 module.exports = router;
