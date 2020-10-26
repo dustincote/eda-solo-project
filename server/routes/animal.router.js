@@ -3,9 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated,} = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
+
 router.get('/', rejectUnauthenticated, (req, res) => {
   let queryText =`SELECT * FROM "animals";`
   pool.query(queryText).then(result => res.send(result.rows))
@@ -15,9 +13,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
-/**
- * POST route template
- */
+
 //post to /api/animal/cow this is used to post a new cow to the database
 router.post('/cow', rejectUnauthenticated, (req, res) => {
   // console.log(req.body);
@@ -54,7 +50,7 @@ router.post('/cow', rejectUnauthenticated, (req, res) => {
 router.post('/calf', (req, res) => {
   // console.log(req.body);
   console.log(req.user);
-  console.log('adding a cow with tag number', req.body.tag_number);
+  console.log('adding a calf with tag number', req.body.tag_number);
   let body = req.body;
   let values = [
     body.dam_id,
@@ -67,11 +63,11 @@ router.post('/calf', (req, res) => {
     body.castrated,
     body.birthweight,
     body.calf,
-    body.close_to_calving
+    body.status,
   ];
   let queryText = ` INSERT INTO "animals" 
-    ("dam_id", "sire_id", "tag_number", "gender", "user_id", "birth_date", "calving_ease", "castrated", "birthweight",  "calf", "close_to_calving" )
-    VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`
+    ("dam_id", "sire_id", "tag_number", "gender", "user_id", "birth_date", "calving_ease", "castrated", "birthweight",  "calf", "status" )
+    VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`
   pool.query(queryText, values).then(result => {
     res.send({ animal_id: result.rows[0].animal_id });
     console.log(result.rows[0].animal_id)
