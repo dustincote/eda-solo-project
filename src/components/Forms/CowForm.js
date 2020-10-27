@@ -27,7 +27,7 @@ const CowForm = (props) => {
     const [newCow, setCow] = useState({
         tag_number: '',
         gender: 'cow',
-        birth_date: '1/1/1990',
+        birth_date: '1990-01-01',
         sire_id: '',
         disposition: 0,
         close_to_calving: false,

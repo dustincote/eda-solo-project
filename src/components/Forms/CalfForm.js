@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Grid from "@material-ui/core/Grid";
-import Header from '../Header/Header';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -15,6 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper';
 import { useParams } from 'react-router';
+import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles((theme) => ({
     input: {
         marginTop: 25,
@@ -41,13 +41,13 @@ const CalfForm = (props) => {
     const classes = useStyles();
     const [newCalf, setCalf] = useState({
         tag_number: '',
-        gender: 'cow',
-        birth_date: '1/1/1990',
+        gender: 'heifer',
+        birth_date: '1990-01-01',
         sire_id: '',
         disposition: 0,
-        close_to_calving: false,
+        castrated: false,
         user_id: 1,
-        calf: false,
+        calf: true,
     })
     const [calfNote, setCalfNote] = useState('')
     const [dam, setDam] = useState(null);
@@ -59,10 +59,18 @@ const CalfForm = (props) => {
         console.log(newCalf);
     }
     const handleCheck = (event) => {
-        setCalf({
+       if(event.target.checked === true){ setCalf({
             ...newCalf,
-            [event.target.name]: event.target.checked
-        });
+            [event.target.name]: event.target.checked,
+            gender: 'steer'
+        });}else{
+           setCalf({
+               ...newCalf,
+               [event.target.name]: event.target.checked,
+               gender: 'bull'
+           });
+        }
+
         console.log(newCalf)
     }
 
@@ -86,13 +94,15 @@ const CalfForm = (props) => {
         });
         setCalfNote('');
     }
-    useEffect(() => { setDam(props.herd.filter(cow => cow.animal_id === Number(dam_id))) }, [])
+    useEffect(() => { setDam(props.herd.filter(cow => cow.animal_id === Number(dam_id))) },[props.herd])
+    useEffect(() => { props.dispatch({type:'GET_HERD'})}, [])
+
+
 
     return (
         <>
-            {console.log(props)}
-            {console.log(dam)}
-            <Header />
+            {/* {console.log('calf form props:',props)}
+            {dam != null && dam[0] && console.log('dam is:',dam[0])} */}
             <Grid
                 container
                 justify="center"
@@ -103,18 +113,21 @@ const CalfForm = (props) => {
                     <Paper>
                         <Grid container justify="center">
 
-                            <Grid item xs={8}  >
+                            <Grid item xs={8} style={{textAlign:'center'}} >
+                                <Typography style={{marginTop: 15}} variant="subtitle1">Enter Calf Information for Cow# {dam != null && dam[0] && dam[0].tag_number}</Typography>
                                 <form onSubmit={submit}>
 
                                     <TextField fullWidth value={newCalf.tag_number} onChange={handleChange} name="tag_number" required label="Tag Number" /><br /><br />
                                     <FormControl style={{ textAlign: 'left' }}>
-                                        <FormLabel style={{ textAlign: 'left' }}>Type:</FormLabel>
+                                        <FormLabel style={{ textAlign: 'left' }}>Gender:</FormLabel>
                                         <RadioGroup style={{ alignItems: 'left' }} onChange={handleChange} name="gender" value={newCalf.gender} row >
-                                            <FormControlLabel value="cow" control={<Radio color="primary" />} label="Cow" />
+                                            <FormControlLabel value={newCalf.castrated ? 'steer' : 'bull'} control={<Radio color="primary" />} label={newCalf.castrated ? 'Steer': 'Bull'} />
                                             <FormControlLabel value="heifer" control={<Radio color="primary" />} label="Heifer" />
                                         </RadioGroup>
                                     </FormControl>
                                     <br />
+                                    <FormControlLabel label="Castrated" control={<Checkbox disabled={newCalf.gender === 'heifer'} color="primary" checked={newCalf.castrated} onChange={handleCheck} name="castrated" />} /><br />
+
                                     <TextField
                                         fullWidth
                                         InputLabelProps={{ shrink: true, }}
@@ -136,7 +149,6 @@ const CalfForm = (props) => {
                                             <MenuItem value={6}>6: Very Aggressive</MenuItem>
                                         </Select>
                                     </FormControl><br />
-                                    <FormControlLabel label="Close To Calving" control={<Checkbox color="primary" checked={newCalf.close_to_calving} onChange={handleCheck} name="close_to_calving" />} /><br />
                                     <TextField
                                         onChange={noteChange}
                                         fullWidth

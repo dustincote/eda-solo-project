@@ -54,7 +54,7 @@ const HerdView = (props) => {
     }
     const addCalf = (cow) => {
         console.log(cow)
-        props.history.push(`/add-calf/${cow.animal_id}`)
+        props.history.push(`/add/calf/${cow.animal_id}`)
     }
     const addAnimal = () => {
         props.history.push('/add/cow');

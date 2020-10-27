@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CowForm from '../Forms/CowForm';
 import HerdView from '../HerdView/HerdView';
+import CalfForm from '../Forms/CalfForm';
 
 import './App.css';
 
@@ -74,6 +75,12 @@ class App extends Component {
               exact
               path="/add/cow"
               component={CowForm}
+            />
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/add/calf/:dam_id"
+              component={CalfForm}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will
