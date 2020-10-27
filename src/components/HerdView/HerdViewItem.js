@@ -49,7 +49,7 @@ const HerdViewItem = (props) => {
                     size="small" 
                     variant="contained" 
                     color="default">
-                Add Calf
+                More Details
                 </Button>
             </TableCell>
             <TableCell style={{ textAlign: 'center' }}>
@@ -71,6 +71,6 @@ const HerdViewItem = (props) => {
 
 }
 
-const map = (state) => ({ herd: state.herd.herd, })
+const map = (state) => ({ herd: state.herd, })
 
 export default connect(map)(withRouter(HerdViewItem));

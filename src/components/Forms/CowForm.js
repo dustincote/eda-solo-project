@@ -32,7 +32,7 @@ const CowForm = (props) => {
         gender: 'cow',
         birth_date: moment().subtract(5,'year').format('yyyy-MM-DD'),
         sire_id: '',
-        disposition: 0,
+        disposition: '',
         close_to_calving: false,
         calf: false,
     })
@@ -63,14 +63,15 @@ const CowForm = (props) => {
         setCow({
             tag_number: '',
             gender: 'cow',
-            birth_date: '1/1/1990',
+            birth_date: moment().subtract(5, 'year').format('yyyy-MM-DD'),
             sire_id: '',
-            disposition: 0,
+            disposition: '',
             close_to_calving: false,
             user_id: 1,
             calf: false,
         });
         setNote('');
+        props.history.push('/herd')
     }
 
     return (
@@ -111,7 +112,6 @@ const CowForm = (props) => {
                                 <FormControl fullWidth >
                                     <InputLabel id="disposition">Disposition:</InputLabel>
                                     <Select fullWidth name="disposition" placeholder="disposition" value={newCow.disposition} onChange={handleChange}>
-                                        <MenuItem value={0}>Select a Score</MenuItem>
                                         <MenuItem value={1}>1: Docile</MenuItem>
                                         <MenuItem value={2}>2: Restless</MenuItem>
                                         <MenuItem value={3}>3: Nervous</MenuItem>

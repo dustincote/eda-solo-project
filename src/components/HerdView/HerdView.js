@@ -40,24 +40,32 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-//this is the component that will display all of the movies
-//we will dispatch to get movies and genres on loading of the component
+//this component will bring in the entire herd and display it 
+//in table form
 const HerdView = (props) => {
     const classes = useStyles();
     useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
-    //use this to retrieve the current lat and long for a person
 
+    //set up state for the filter function of the component
     const [filterHerd, setFilterHerd] = useState(false);
+
+    //set up a function that will filter the herd based on the filter set up
+    //we will not show calves in this component and we will not show archived animals in 
+    //this component
     const rows = () => {
         if (filterHerd) {
-            return props.herd.filter(cow => cow.gender === filterHerd && !cow.calf )
-        } else if (props.herd[0]){ return props.herd.filter(cow => !cow.calf) }
+            return props.herd.filter(cow => cow.gender === filterHerd && !cow.calf && !cow.archived)
+        } else if (props.herd[0]){ return props.herd.filter(cow => !cow.calf && !cow.archived) }
         else{return props.herd}
     }
+
+    //takes you the the CalfForm
     const addCalf = (cow) => {
         console.log(cow)
         props.history.push(`/add/calf/${cow.animal_id}`)
     }
+
+    //takes you to the CowForm
     const addAnimal = () => {
         props.history.push('/add/cow');
     }
@@ -79,15 +87,16 @@ const HerdView = (props) => {
                     <MenuItem value={false}>All</MenuItem>
                     <MenuItem value="cow">Cows</MenuItem>
                     <MenuItem value="heifer">Heifers</MenuItem>
+                    <MenuItem value="bull">Bull</MenuItem>
                 </Select>
-                <h1>{rows().length} Cows</h1>
+                <h1>{rows().length} Animals</h1>
                 <Paper className={classes.root}>
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>
-                                    <TableCell style={{ textAlign: 'center' }}>Add Calf</TableCell>
+                                    <TableCell style={{ textAlign: 'center' }}>More Details</TableCell>
                                     <TableCell style={{textAlign:'center'}}>Close to Calving</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -108,6 +117,6 @@ const HerdView = (props) => {
 
 }
 
-const map = (state) => ({ herd: state.herd.herd, })
+const map = (state) => ({ herd: state.herd, })
 
 export default connect(map)(withRouter(HerdView));

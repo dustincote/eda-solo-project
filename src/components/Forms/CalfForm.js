@@ -246,6 +246,6 @@ const CalfForm = (props) => {
 
 }
 
-const map = (state) => ({ herd: state.herd.herd, })
+const map = (state) => ({ herd: state.herd, })
 
 export default connect(map)(withRouter(CalfForm));

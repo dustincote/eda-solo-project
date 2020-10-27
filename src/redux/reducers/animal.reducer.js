@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 
 const herd = (state=[], action) => {
     if(action.type=== 'SET_HERD'){
@@ -8,7 +7,6 @@ const herd = (state=[], action) => {
 
 
 
-export default combineReducers({
-    herd,
 
-})
+
+export default herd

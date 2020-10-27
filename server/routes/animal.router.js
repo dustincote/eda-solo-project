@@ -26,7 +26,7 @@ router.post('/cow', rejectUnauthenticated, (req, res) => {
   body.gender,
   req.user.id,
   body.birth_date,
-  body.disposition,
+  (body.disposition === '' ? null : body.disposition),
   body.calving_ease,
   body.castrated,
   body.birthweight,
@@ -77,10 +77,19 @@ router.post('/calf', rejectUnauthenticated, (req, res) => {
   })
 });//end post route to /api/animal/cow
 
+//get request to get notes on specific animal.
+router.get('/note/:id', rejectUnauthenticated,(req, res) => {
+  let queryText = `SELECT * FROM "notes" WHERE "animal_id"=$1;`
+  pool.query(queryText, [req.params.id]).then(result => res.send(result.rows)).catch(e =>{
+    console.log('error getting notes', e);
+    res.sendStatus(500);
+  });
+});//end get route to /api/animal/note/:id
+
 
 //post route to /api/animal/note this is used to add a note to an animal
 router.post('/note', rejectUnauthenticated, (req, res) => {
-  let queryText = `INSERT INTO "notes" ("note", "animal_id") VALUES ($1, $2)`
+  let queryText = `INSERT INTO "notes" ("note", "animal_id") VALUES ($1, $2);`
   pool.query(queryText, [req.body.note, req.body.animal_id]).then(result => res.sendStatus(201)).catch(e => {
     console.log('error posting note', e);
     res.sendStatus(500);
@@ -96,6 +105,17 @@ router.put('/close', rejectUnauthenticated, (req, res)=> {
     console.log('error updating close to calving', e);
     res.sendStatus(500);
   })
-})
+});// end put route to /api/animal/close
+
+
+//put route to update archived
+router.put('/archive', rejectUnauthenticated, (req, res) => {
+  let queryText = `UPDATE "animals" SET "archived"=$1, "date_archived"=$2 WHERE "animal_id"=$3 AND "user_id"=$4;`
+  pool.query(queryText, [req.body.archived, req.body.date_archived, req.body.animal_id, req.user.id]).then(result => res.sendStatus(200))
+    .catch(e => {
+      console.log('error updating close to calving', e);
+      res.sendStatus(500);
+    })
+});// end put route to /api/animal/archive
 
 module.exports = router;

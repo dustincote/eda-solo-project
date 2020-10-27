@@ -38,22 +38,38 @@ function* fetchHerd(action) {
     try {
         const response = yield Axios.get('/api/animal');
         yield put({ type: 'SET_HERD', payload: response.data })
-    } catch (err) { console.log('error getting herd', err) }
-}
+    } catch (err) { console.log('error getting herd', err) };
+};
 
 function* closeToCalving(action){
     try{
         yield Axios.put('/api/animal/close', action.payload);
         yield put({type: 'GET_HERD'});
-    }catch(e){console.log('error updating close to calving', e)}
-}
+    }catch(e){console.log('error updating close to calving', e)};
+};
+
+function* updateArchived(action){
+    try{
+        yield Axios.put('/api/animal/archive', action.payload);
+        yield put({type: 'GET_HERD'});
+    }catch(e){console.log('error archiving animal', e)};
+};
+
+function* getNotes(action){
+    try{
+        const response = yield Axios.get(`/api/animal/note/${action.payload}`);
+        yield put({type:"SET_ANIMAL_NOTE", payload: response.data});
+    }catch(e){console.log('error getting notes', e)};
+};
 
 function* animalSaga(){
     yield takeLatest('ADD_COW', addCow);
     yield takeLatest('ADD_NOTE', addNote);
+    yield takeEvery('GET_NOTES', getNotes);
     yield takeLatest('GET_HERD', fetchHerd);
     yield takeLatest('ADD_CALF', addCalf);
     yield takeEvery('UPDATE_CLOSE_TO_CALVING', closeToCalving);
+    yield takeLatest('UPDATE_ARCHIVED', updateArchived);
 }
 
 export default animalSaga;
