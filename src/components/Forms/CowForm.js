@@ -10,9 +10,12 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormLabel from '@material-ui/core/FormLabel';
 import { FormControl, FormControlLabel } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox'
-import Button from '@material-ui/core/Button'
+import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import moment from 'moment';
+
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -27,11 +30,10 @@ const CowForm = (props) => {
     const [newCow, setCow] = useState({
         tag_number: '',
         gender: 'cow',
-        birth_date: '1990-01-01',
+        birth_date: moment().subtract(5,'year').format('yyyy-MM-DD'),
         sire_id: '',
         disposition: 0,
         close_to_calving: false,
-        user_id: 1,
         calf: false,
     })
     const [note, setNote] = useState('')
@@ -118,7 +120,7 @@ const CowForm = (props) => {
                                         <MenuItem value={6}>6: Very Aggressive</MenuItem>
                                     </Select>
                                 </FormControl><br />
-                                <FormControlLabel disabled={newCow.gender === 'bull'} label="Close To Calving" control={<Checkbox color="primary" checked={newCow.close_to_calving} onChange={handleCheck} name="close_to_calving" />} /><br />
+                                <FormControlLabel disabled={newCow.gender === 'bull'} label="Close To Calving" control={<Checkbox color="primary" checked={newCow.close_to_calving} onChange={handleCheck} name="close_to_calving" />} /> <br />
                                 <TextField
                                     onChange={noteChange}
                                     fullWidth

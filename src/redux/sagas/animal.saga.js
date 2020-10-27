@@ -24,6 +24,16 @@ function* addCow(action) {
     } catch (e) { console.log('error adding cow', e) };
 };
 
+function* addCalf(action) {
+    try {
+        const response = yield Axios.post('/api/animal/calf', action.payload.newCalf);
+        if (action.payload.note != "") {
+            yield put({ type: 'ADD_NOTE', payload: { animal_id: response.data.animal_id, note: action.payload.note } })
+        };
+        yield put({ type: 'GET_HERD' })
+    } catch (e) { console.log('error adding cow', e) };
+};
+
 function* fetchHerd(action) {
     try {
         const response = yield Axios.get('/api/animal');
@@ -35,6 +45,7 @@ function* animalSaga(){
     yield takeLatest('ADD_COW', addCow);
     yield takeLatest('ADD_NOTE', addNote);
     yield takeLatest('GET_HERD', fetchHerd);
+    yield takeLatest('ADD_CALF', addCalf);
 }
 
 export default animalSaga;

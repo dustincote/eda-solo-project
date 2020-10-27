@@ -14,6 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router'
 import { FormLabel } from '@material-ui/core';
+import HerdViewItem from './HerdViewItem';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,9 +31,10 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         maxHeight: 440,
-        width: 400,
+        width: 'auto',
+        textAlign:'center',
     },
-    root: { width: 400 },
+    root: { width: 500 },
     grid: { marginBottom: 25 },
 }));
 
@@ -48,7 +50,7 @@ const HerdView = (props) => {
     const [filterHerd, setFilterHerd] = useState(false);
     const rows = () => {
         if (filterHerd) {
-            return props.herd.filter(cow => cow.gender === filterHerd )
+            return props.herd.filter(cow => cow.gender === filterHerd && !cow.calf )
         } else if (props.herd[0]){ return props.herd.filter(cow => !cow.calf) }
         else{return props.herd}
     }
@@ -63,7 +65,7 @@ const HerdView = (props) => {
 
     return (
 
-        <div className={classes.grid}>
+            <>
             {/* {console.log(rows())}
             {console.log(props)} */}
             <Grid
@@ -71,7 +73,7 @@ const HerdView = (props) => {
                 container
                 direction='column'
                 alignItems="center"
-                spacing={2}
+                spacing={0}
             >   <FormLabel>Select Filter</FormLabel>
                 <Select style={{width: 'auto'}} value={filterHerd} onChange={(e) => setFilterHerd(e.target.value)}>
                     <MenuItem value={false}>All</MenuItem>
@@ -84,22 +86,13 @@ const HerdView = (props) => {
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Tag Number</TableCell>
-                                    <TableCell>Disposition</TableCell>
-                                    <TableCell>Status</TableCell>
-                                    <TableCell>Add Calf</TableCell>
+                                    <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>
+                                    <TableCell style={{ textAlign: 'center' }}>Add Calf</TableCell>
+                                    <TableCell style={{textAlign:'center'}}>Close to Calving</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows() != undefined && rows().map(row => (
-                                    <TableRow key={row.animal_id}>
-                                        <TableCell>{row.tag_number}</TableCell>
-                                        <TableCell>{row.disposition}</TableCell>
-                                        <TableCell>{row.status}</TableCell>
-                                        <TableCell><Button onClick={() => addCalf(row)} style={{ fontSize: 10 }} size="small" variant="contained" color="default">Add Calf</Button></TableCell>
-                                    </TableRow>
-
-                                ))}
+                                {rows() != undefined && rows().map(row => (<HerdViewItem key={row.animal_id} row={row} />))}
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -109,8 +102,7 @@ const HerdView = (props) => {
                         onClick={addAnimal}
                         >Add New Animal To Herd</Button>
             </Grid><br /><br />
-            
-        </div>
+            </>
 
     );
 

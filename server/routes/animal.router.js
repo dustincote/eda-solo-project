@@ -5,8 +5,8 @@ const { rejectUnauthenticated,} = require('../modules/authentication-middleware'
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText =`SELECT * FROM "animals";`
-  pool.query(queryText).then(result => res.send(result.rows))
+  let queryText =`SELECT * FROM "animals" WHERE "user_id"=$1;`
+  pool.query(queryText,[req.user.id]).then(result => res.send(result.rows))
   .catch(e => {
     console.log('error getting animals', e);
     res.sendStatus(500);
@@ -59,11 +59,11 @@ router.post('/calf', (req, res) => {
     body.gender,
     req.user.id,
     body.birth_date,
-    body.calving_ease,
+    (body.calving_ease === '' ? null: body.calving_ease),
     body.castrated,
-    body.birthweight,
+    (body.birthweight === '' ? null: body.birthweight),
     body.calf,
-    body.status,
+    (body.status === '' ? null: body.status),
   ];
   let queryText = ` INSERT INTO "animals" 
     ("dam_id", "sire_id", "tag_number", "gender", "user_id", "birth_date", "calving_ease", "castrated", "birthweight",  "calf", "status" )
