@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import Axios from 'axios';
 
 
@@ -41,11 +41,19 @@ function* fetchHerd(action) {
     } catch (err) { console.log('error getting herd', err) }
 }
 
+function* closeToCalving(action){
+    try{
+        yield Axios.put('/api/animal/close', action.payload);
+        yield put({type: 'GET_HERD'});
+    }catch(e){console.log('error updating close to calving', e)}
+}
+
 function* animalSaga(){
     yield takeLatest('ADD_COW', addCow);
     yield takeLatest('ADD_NOTE', addNote);
     yield takeLatest('GET_HERD', fetchHerd);
     yield takeLatest('ADD_CALF', addCalf);
+    yield takeEvery('UPDATE_CLOSE_TO_CALVING', closeToCalving);
 }
 
 export default animalSaga;

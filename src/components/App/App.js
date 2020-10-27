@@ -22,8 +22,10 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import CowForm from '../Forms/CowForm';
 import HerdView from '../HerdView/HerdView';
 import CalfForm from '../Forms/CalfForm';
+import DetailsPage from '../DetailsPage/DetailsPage';
 
 import './App.css';
+import { Details } from '@material-ui/icons';
 
 class App extends Component {
   componentDidMount() {
@@ -81,6 +83,12 @@ class App extends Component {
               exact
               path="/add/calf/:dam_id"
               component={CalfForm}
+            />
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/details/:animal_id"
+              component={DetailsPage}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will

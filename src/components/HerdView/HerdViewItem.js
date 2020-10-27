@@ -16,24 +16,23 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 //we will dispatch to get movies and genres on loading of the component
 const HerdViewItem = (props) => {
     const row = props.row
-    const [cow, setCow] = useState({close_to_calving: row.close_to_calving})
 
  
 
-    const addCalf = (cow) => {
-        console.log(cow)
-        props.history.push(`/add/calf/${cow.animal_id}`)
+    const addCalf = (row) => {
+        console.log(row)
+        props.history.push(`/add/calf/${row.animal_id}`)
     }
-    const addAnimal = () => {
-        props.history.push('/add/cow');
+
+    const details = () => {
+        props.history.push(`/details/${row.animal_id}`)
     }
+
     const handleCheck = (event) => {
-        props.dispatch({ type: 'UPDATE_CLOSE_TO_CALVING', payload: {animal_id: row.animal_id, close_to_calving: !cow.close_to_calving} });
+        props.dispatch({ type: 'UPDATE_CLOSE_TO_CALVING', payload: {animal_id: row.animal_id, close_to_calving: !row.close_to_calving} });
 
     }
-    const dispatchCloseToCalving = () => {
 
-    }
 
 
     
@@ -45,7 +44,7 @@ const HerdViewItem = (props) => {
             <TableCell style={{ textAlign: 'center' }}>{row.tag_number}</TableCell>
             <TableCell style={{ textAlign: 'center' }}>
                 <Button  
-                    onClick={() => addCalf(row)} 
+                    onClick={details} 
                     style={{ fontSize: 10 }} 
                     size="small" 
                     variant="contained" 
@@ -61,7 +60,7 @@ const HerdViewItem = (props) => {
                     control={
                         <Checkbox 
                         color="primary" 
-                        checked={cow.close_to_calving} 
+                        checked={row.close_to_calving} 
                         onChange={handleCheck} 
                         name="close_to_calving" 
                         />} />

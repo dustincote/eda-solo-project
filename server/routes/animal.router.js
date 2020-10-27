@@ -5,7 +5,7 @@ const { rejectUnauthenticated,} = require('../modules/authentication-middleware'
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText =`SELECT * FROM "animals" WHERE "user_id"=$1;`
+  let queryText =`SELECT * FROM "animals" WHERE "user_id"=$1 ORDER BY "tag_number";`
   pool.query(queryText,[req.user.id]).then(result => res.send(result.rows))
   .catch(e => {
     console.log('error getting animals', e);
@@ -47,7 +47,7 @@ router.post('/cow', rejectUnauthenticated, (req, res) => {
 
 
 //post to /api/animal/calf this is used to post a new calf to the database
-router.post('/calf', (req, res) => {
+router.post('/calf', rejectUnauthenticated, (req, res) => {
   // console.log(req.body);
   console.log(req.user);
   console.log('adding a calf with tag number', req.body.tag_number);
@@ -79,12 +79,23 @@ router.post('/calf', (req, res) => {
 
 
 //post route to /api/animal/note this is used to add a note to an animal
-router.post('/note', (req, res) => {
+router.post('/note', rejectUnauthenticated, (req, res) => {
   let queryText = `INSERT INTO "notes" ("note", "animal_id") VALUES ($1, $2)`
   pool.query(queryText, [req.body.note, req.body.animal_id]).then(result => res.sendStatus(201)).catch(e => {
     console.log('error posting note', e);
     res.sendStatus(500);
   })
 });//end post route to /api/animal/note
+
+
+//put route to update close_to_calving
+router.put('/close', rejectUnauthenticated, (req, res)=> {
+  let queryText = `UPDATE "animals" SET "close_to_calving"=$1 WHERE "animal_id"=$2 AND "user_id"=$3;`
+  pool.query(queryText, [req.body.close_to_calving, req.body.animal_id, req.user.id]).then(result => res.sendStatus(200))
+  .catch(e => {
+    console.log('error updating close to calving', e);
+    res.sendStatus(500);
+  })
+})
 
 module.exports = router;
