@@ -44,10 +44,10 @@ const useStyles = makeStyles((theme) => ({
 //in table form
 const YetToCalfTable = (props) => {
     const classes = useStyles();
-    const [rows, setRows] = useState(props.herd)
-    useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
-    useEffect(() => { setRows(props.herd.filter(cow => !cow.close_to_calving && !cow.calf && cow.gender != 'bull')) }, [props.herd])
-
+    const [rows, setRows] = useState(props.yetToCalf)
+    // useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
+    // useEffect(() => { setRows(props.herd.filter(cow => !cow.close_to_calving && !cow.calf && cow.gender != 'bull')) }, [props.herd])
+    useEffect(()=> setRows(props.yetToCalf),[props.yetToCalf]);
 
 
     //takes you the the CalfForm
@@ -94,6 +94,6 @@ const YetToCalfTable = (props) => {
 
 }
 
-const map = (state) => ({ herd: state.herd, })
+// const map = (state) => ({ herd: state.herd, yetToCalf: state.yetToCalf })
 
-export default connect(map)(withRouter(YetToCalfTable));
+export default connect()(withRouter(YetToCalfTable));

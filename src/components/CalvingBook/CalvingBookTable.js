@@ -44,9 +44,9 @@ const useStyles = makeStyles((theme) => ({
 //in table form
 const CloseToCalvingTable = (props) => {
     const classes = useStyles();
-    const [rows, setRows]=useState(props.herd)
-    useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
-    useEffect(()=> {setRows(props.herd.filter(cow => cow.close_to_calving))},[props.herd])
+    const [rows, setRows]=useState(props.closeToCalving)
+    // useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
+    useEffect(()=> {setRows(props.closeToCalving)},[props.closeToCalving])
 
     //set up state for the filter function of the component
     const [filterHerd, setFilterHerd] = useState(false);
@@ -80,7 +80,7 @@ const CloseToCalvingTable = (props) => {
             {console.log(props)} */}
 
 
-                <h1>{rows.length} Close to calving</h1>
+        <h1>{rows.length} {props.heading}</h1>
                 <Paper className={classes.root}>
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">

@@ -6,6 +6,7 @@ import animalNotes from './animalNotes.reducer';
 import allNotes from './allNotes.reducer';
 import alreadyCalved from './alreadyCalved.reducer';
 import yetToCalf from './yetToCalfReducer'
+import closeToCalving from './closeToCalving.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   allNotes,
   alreadyCalved,
   yetToCalf,
+  closeToCalving,
 });
 
 export default rootReducer;

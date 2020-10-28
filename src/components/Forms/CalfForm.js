@@ -123,8 +123,8 @@ const CalfForm = (props) => {
         if(cowNote != ''){
             props.dispatch({type:'ADD_NOTE', payload:{note: cowNote, animal_id: dam_id}});
         }
+        props.dispatch({type: 'UPDATE_CLOSE_TO_CALVING', payload:{close_to_calving: false, animal_id: dam_id}})
         props.history.push('/home')
-
     }
     useEffect(() => { setDam(props.herd.filter(cow => cow.animal_id === Number(dam_id)))},[props.herd])
     useEffect(() => { props.dispatch({type:'GET_HERD'})}, [])

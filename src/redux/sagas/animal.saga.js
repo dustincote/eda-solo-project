@@ -41,6 +41,7 @@ function* fetchHerd(action) {
         yield put({ type: 'SET_HERD', payload: response.data });
         yield put({ type: 'SET_ALREADY_CALVED', payload: response.data });
         yield put({ type: 'SET_YET_TO_CALF', payload: response.data });
+        yield put({ type: 'SET_CLOSE_TO_CALVING', payload: response.data });
 
     } catch (err) { console.log('error getting herd', err) };
 };

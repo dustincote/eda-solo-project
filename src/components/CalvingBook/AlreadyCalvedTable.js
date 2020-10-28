@@ -45,10 +45,11 @@ const useStyles = makeStyles((theme) => ({
 const AlreadyCalvedTable = (props) => {
     const classes = useStyles();
     const [calved, setCalved] = useState([])
-    const [rows, setRows] = useState(props.herd)
-    useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
-    useEffect(() => { setCalved(props.herd.filter(cow =>  cow.calf && !cow.archived).map(cow => Number(cow.dam_id))) }, [props.herd])
-    useEffect(() => { setRows(props.herd.filter(cow => calved.indexOf(cow.animal_id)!= -1)) }, [calved])
+    const [rows, setRows] = useState(props.alreadyCalved)
+    // useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
+    // useEffect(() => { setCalved(props.herd.filter(cow =>  cow.calf && !cow.archived).map(cow => Number(cow.dam_id))) }, [props.herd])
+    // useEffect(() => { setRows(props.herd.filter(cow => calved.indexOf(cow.animal_id)!= -1)) }, [calved])
+    useEffect(() => { setRows(props.alreadyCalved) }, [props.alreadyCalved]);
 
 
 
