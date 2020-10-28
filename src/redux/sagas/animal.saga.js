@@ -7,6 +7,7 @@ import Axios from 'axios';
 function* addNote(action) {
     try {
         yield Axios.post('/api/animal/note', action.payload);
+        yield put({type:'GET_NOTES', payload: action.payload.animal_id});
 
     } catch (e) { console.log('error posting note', e) };
 };//end add Note
@@ -62,6 +63,20 @@ function* getNotes(action){
     }catch(e){console.log('error getting notes', e)};
 };
 
+function* getAllNotes(action) {
+    try {
+        const response = yield Axios.get(`/api/animal/note/`);
+        yield put({ type: "SET_ALL_NOTES", payload: response.data });
+    } catch (e) { console.log('error getting notes', e) };
+};
+
+function* deleteNote(action){
+    try{
+        yield Axios.delete(`/api/animal/note/${action.payload.id}`)
+        yield put({type:'GET_NOTES', payload: action.payload.animal_id});
+    }catch(e){console.log('error deleting note', e)}
+}
+
 function* animalSaga(){
     yield takeLatest('ADD_COW', addCow);
     yield takeLatest('ADD_NOTE', addNote);
@@ -70,6 +85,8 @@ function* animalSaga(){
     yield takeLatest('ADD_CALF', addCalf);
     yield takeEvery('UPDATE_CLOSE_TO_CALVING', closeToCalving);
     yield takeLatest('UPDATE_ARCHIVED', updateArchived);
+    yield takeEvery('GET_ALL_NOTES', getAllNotes);
+    yield takeLatest('DELETE_NOTE', deleteNote);
 }
 
 export default animalSaga;

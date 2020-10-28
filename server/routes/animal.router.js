@@ -96,6 +96,16 @@ router.post('/note', rejectUnauthenticated, (req, res) => {
   })
 });//end post route to /api/animal/note
 
+//delete route to delete a note from an animal
+router.delete('/note/:id', rejectUnauthenticated, (req, res) => {
+  let queryText = ` DELETE FROM "notes" where "note_id"=$1;`
+  pool.query(queryText, [req.params.id]).then(result => res.sendStatus(200)).catch(
+    e => { 
+      console.log('error deleting note', e);
+      res.sendStatus(500);
+  })
+})
+
 
 //put route to update close_to_calving
 router.put('/close', rejectUnauthenticated, (req, res)=> {

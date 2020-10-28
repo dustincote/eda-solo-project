@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import moment from 'moment';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
     root: {
@@ -36,6 +38,8 @@ function DetailsPage(props) {
     const [animalsCalves, setAnimalsCalves] = useState([]);
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
+    const [addNewNote, setAddNewNote]= useState(false);
+    const [note, setNote] = useState('');
 
     useEffect(() => { setAnimal(props.herd.filter(a => a.animal_id === Number(animal_id)))},[props.herd, animal_id]);
     useEffect(() => { animal[0] && setDam(props.herd.filter(a => a.animal_id === Number(animal[0].dam_id)))},[animal]);
@@ -58,11 +62,22 @@ function DetailsPage(props) {
                 archived: !animal[0].archived,
                 date_archived: moment().format('yyyy-MM-DD') 
             } });
-
     }
 
+    const deleteNote = (id) => {
+        props.dispatch({type:'DELETE_NOTE', payload: {id:id, animal_id: animal_id}});
+    }
+
+    const submitNote = () => {
+        console.log({note: note, animal_id: animal_id})
+        props.dispatch({type: 'ADD_NOTE', payload:{note: note, animal_id: animal_id}});
+        setAddNewNote(false);
+        setNote('');
+    }
+
+
     return (
-        
+        <Grid container justify='center'>
         <Card className={classes.root}>
             {console.log(animal)}
             {console.log(dam)}
@@ -87,14 +102,27 @@ function DetailsPage(props) {
                 </Typography>
                 <ul>
                     {animalsCalves.map(a => 
-                    <li key={a.animal_id}>Tag Number: {a.tag_number} Gender: {a.gender}<Button onClick={() => details(a.animal_id)}>Details</Button></li>)}
+                        <li key={a.animal_id}>Tag Number: {a.tag_number} Gender: {a.gender}<Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={() => details(a.animal_id)}>Details</Button></li>)}
                     </ul>
+                {addNewNote ? <><TextField
+                    onChange={(event)=> setNote(event.target.value)}
+                    id="outlined-multiline-static"
+                    label="Notes"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    value={note}
+                />
+                <Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={submitNote}>Submit</Button></>
+                :
+                <Button variant='contained' style={{ fontSize: 10 }} size="small" onClick={() => setAddNewNote(true)}>Add New Note</Button> }
+
                 <Typography className={classes.pos} color="textSecondary">
                     Notes: {props.animalNotes ? 
                             props.animalNotes.map(
                                 note => 
                                     <span key={note.note_id}>
-                                        {note.note}<br/>
+                                        {note.note}<Button onClick={() => deleteNote(note.note_id)}>Delete Note</Button><br/>
                                     </span>) 
                                 : 'none'}
                 </Typography>
@@ -111,9 +139,10 @@ function DetailsPage(props) {
                         />} />}
             </CardContent>
             <CardActions>
-                <Button size="small" onClick={backToHerd}>Back to Herd</Button>
+                <Button variant='contained' style={{fontSize: 10}} size="small" onClick={backToHerd}>Back to Herd</Button>
             </CardActions>
         </Card>
+        </Grid>
     );
 }
 

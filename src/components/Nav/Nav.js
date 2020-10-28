@@ -37,6 +37,9 @@ const Nav = (props) => {
             <Link className="nav-link" to="/herd">
               Herd
             </Link>
+            <Link className="nav-link" to="/calvingbook">
+              CalvingBook
+            </Link>
             <LogOutButton className="nav-link" />
           </>
         )}

@@ -14,10 +14,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 //this is the component that will display all of the movies
 //we will dispatch to get movies and genres on loading of the component
-const HerdViewItem = (props) => {
+const CalvingBookItem = (props) => {
     const row = props.row
 
- 
+
 
     const addCalf = (row) => {
         console.log(row)
@@ -29,13 +29,13 @@ const HerdViewItem = (props) => {
     }
 
     const handleCheck = (event) => {
-        props.dispatch({ type: 'UPDATE_CLOSE_TO_CALVING', payload: {animal_id: row.animal_id, close_to_calving: !row.close_to_calving} });
+        props.dispatch({ type: 'UPDATE_CLOSE_TO_CALVING', payload: { animal_id: row.animal_id, close_to_calving: !row.close_to_calving } });
 
     }
 
 
 
-    
+
 
     return (
 
@@ -43,29 +43,29 @@ const HerdViewItem = (props) => {
         <TableRow key={row.animal_id}>
             <TableCell style={{ textAlign: 'center' }}>{row.tag_number}</TableCell>
             <TableCell style={{ textAlign: 'center' }}>
-                <Button  
-                    onClick={details} 
-                    style={{ fontSize: 10 }} 
-                    size="small" 
-                    variant="contained" 
+                <Button
+                    onClick={details}
+                    style={{ fontSize: 10 }}
+                    size="small"
+                    variant="contained"
                     color="default">
-                More Details
+                    More Details
                 </Button>
             </TableCell>
             <TableCell style={{ textAlign: 'center' }}>
-                <FormControlLabel 
+                <FormControlLabel
                     label="Mark as Close"
                     labelPlacement="top"
-                    style={{textAlign: 'center', fontSize: 5,}} 
+                    style={{ textAlign: 'center', fontSize: 5, }}
                     control={
-                        <Checkbox 
-                        disabled={row.gender === 'bull'}
-                        color="primary" 
-                        checked={row.close_to_calving} 
-                        onChange={handleCheck} 
-                        name="close_to_calving" 
+                        <Checkbox
+                            disabled={row.gender === 'bull'}
+                            color="primary"
+                            checked={row.close_to_calving}
+                            onChange={handleCheck}
+                            name="close_to_calving"
                         />} />
-                </TableCell>
+            </TableCell>
         </TableRow>
 
     );
@@ -74,4 +74,4 @@ const HerdViewItem = (props) => {
 
 const map = (state) => ({ herd: state.herd, })
 
-export default connect(map)(withRouter(HerdViewItem));
+export default connect(map)(withRouter(CalvingBookItem));

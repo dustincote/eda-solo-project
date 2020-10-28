@@ -23,6 +23,7 @@ import CowForm from '../Forms/CowForm';
 import HerdView from '../HerdView/HerdView';
 import CalfForm from '../Forms/CalfForm';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import CalvingBook from '../CalvingBook/CalvingBook';
 
 import './App.css';
 import { Details } from '@material-ui/icons';
@@ -89,6 +90,12 @@ class App extends Component {
               exact
               path="/details/:animal_id"
               component={DetailsPage}
+            />
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/calvingbook"
+              component={CalvingBook}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will
