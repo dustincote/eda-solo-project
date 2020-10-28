@@ -4,6 +4,9 @@ import user from './user.reducer';
 import herd from './animal.reducer';
 import animalNotes from './animalNotes.reducer';
 import allNotes from './allNotes.reducer';
+import alreadyCalved from './alreadyCalved.reducer';
+import yetToCalf from './yetToCalfReducer'
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +20,8 @@ const rootReducer = combineReducers({
   herd,
   animalNotes,
   allNotes,
+  alreadyCalved,
+  yetToCalf,
 });
 
 export default rootReducer;

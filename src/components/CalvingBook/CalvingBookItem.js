@@ -19,7 +19,7 @@ const CalvingBookItem = (props) => {
 
 
 
-    const addCalf = (row) => {
+    const addCalf = () => {
         console.log(row)
         props.history.push(`/add/calf/${row.animal_id}`)
     }
@@ -44,12 +44,12 @@ const CalvingBookItem = (props) => {
             <TableCell style={{ textAlign: 'center' }}>{row.tag_number}</TableCell>
             <TableCell style={{ textAlign: 'center' }}>
                 <Button
-                    onClick={details}
+                    onClick={addCalf}
                     style={{ fontSize: 10 }}
                     size="small"
                     variant="contained"
                     color="default">
-                    More Details
+                    Add Calf
                 </Button>
             </TableCell>
             <TableCell style={{ textAlign: 'center' }}>

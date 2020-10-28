@@ -88,9 +88,7 @@ function DetailsPage(props) {
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                     Tag number: {animal[0] != undefined && animal[0].tag_number}
                 </Typography>
-                <Typography>
-                    Dam Tag Number: {dam[0] ? dam[0].tag_number: 'None' }
-                </Typography>
+
                 <Typography>
                     Gender: {animal[0] ? animal[0].gender : 'None'}
                 </Typography>

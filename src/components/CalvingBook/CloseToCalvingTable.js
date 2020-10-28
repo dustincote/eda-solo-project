@@ -15,9 +15,6 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router'
 import { FormLabel } from '@material-ui/core';
 import CalvingBookItem from './CalvingBookItem';
-import CloseToCalvingTable from './CloseToCalvingTable';
-import YetToCalfTable from './YetToCalfTable';
-import AlreadyCalvedTable from './AlreadyCalvedTable';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,9 +42,11 @@ const useStyles = makeStyles((theme) => ({
 
 //this component will bring in the entire herd and display it 
 //in table form
-const CalvingBook = (props) => {
+const CloseToCalvingTable = (props) => {
     const classes = useStyles();
+    const [rows, setRows]=useState(props.herd)
     useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
+    useEffect(()=> {setRows(props.herd.filter(cow => cow.close_to_calving))},[props.herd])
 
     //set up state for the filter function of the component
     const [filterHerd, setFilterHerd] = useState(false);
@@ -55,12 +54,12 @@ const CalvingBook = (props) => {
     //set up a function that will filter the herd based on the filter set up
     //we will not show calves in this component and we will not show archived animals in 
     //this component
-    const rows = () => {
-        if (filterHerd) {
-            return props.herd.filter(cow => cow.gender === filterHerd && !cow.calf && !cow.archived)
-        } else if (props.herd[0]) { return props.herd.filter(cow => !cow.calf && !cow.archived) }
-        else { return props.herd }
-    }
+    // const rows = () => {
+    //     if (filterHerd) {
+    //         return props.herd.filter(cow => cow.gender === filterHerd && !cow.calf && !cow.archived)
+    //     } else if (props.herd[0]) { return props.herd.filter(cow => !cow.calf && !cow.archived) }
+    //     else { return props.herd }
+    // }
 
     //takes you the the CalfForm
     const addCalf = (cow) => {
@@ -79,17 +78,27 @@ const CalvingBook = (props) => {
         <>
             {/* {console.log(rows())}
             {console.log(props)} */}
-            <Grid
-                className={classes.grid}
-                container
-                direction='column'
-                alignItems="center"
-                spacing={0}
-            > 
-            <CloseToCalvingTable /> 
-            <YetToCalfTable /> 
-            <AlreadyCalvedTable />
-            </Grid>
+
+
+                <h1>{rows.length} Close to calving</h1>
+                <Paper className={classes.root}>
+                    <TableContainer className={classes.container}>
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>
+                                    <TableCell style={{ textAlign: 'center' }}>More Details</TableCell>
+                                    <TableCell style={{ textAlign: 'center' }}>Close to Calving</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows != undefined && rows.map(row => (<CalvingBookItem key={row.animal_id} row={row} />))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Paper>
+
+
         </>
 
     );
@@ -98,4 +107,4 @@ const CalvingBook = (props) => {
 
 const map = (state) => ({ herd: state.herd, })
 
-export default connect(map)(withRouter(CalvingBook));
+export default connect(map)(withRouter(CloseToCalvingTable));

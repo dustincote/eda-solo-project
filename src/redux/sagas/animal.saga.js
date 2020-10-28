@@ -38,7 +38,10 @@ function* addCalf(action) {
 function* fetchHerd(action) {
     try {
         const response = yield Axios.get('/api/animal');
-        yield put({ type: 'SET_HERD', payload: response.data })
+        yield put({ type: 'SET_HERD', payload: response.data });
+        yield put({ type: 'SET_ALREADY_CALVED', payload: response.data });
+        yield put({ type: 'SET_YET_TO_CALF', payload: response.data });
+
     } catch (err) { console.log('error getting herd', err) };
 };
 
