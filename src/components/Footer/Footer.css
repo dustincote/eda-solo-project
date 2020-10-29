@@ -3,3 +3,7 @@ footer {
   padding: 20px;
   text-align: center;
 }
+
+#weather-img {
+  height: 50px;
+}
