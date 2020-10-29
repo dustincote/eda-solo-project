@@ -80,14 +80,14 @@ const CloseToCalvingTable = (props) => {
             {console.log(props)} */}
 
 
-        <h1>{rows.length} {props.heading}</h1>
+        <h5>{rows.length} {props.heading}</h5>
                 <Paper className={classes.root}>
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>
-                                    <TableCell style={{ textAlign: 'center' }}>More Details</TableCell>
+                                    <TableCell style={{ textAlign: 'center' }}>Add Calf</TableCell>
                                     <TableCell style={{ textAlign: 'center' }}>Close to Calving</TableCell>
                                 </TableRow>
                             </TableHead>

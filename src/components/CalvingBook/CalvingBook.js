@@ -51,8 +51,9 @@ const CalvingBook = (props) => {
                 container
                 direction='column'
                 alignItems="center"
-                spacing={0}
+                spacing={5}
             > 
+            <h1>Calving Book</h1>
             <CalvingBookTable closeToCalving={props.closeToCalving} heading={'Close To Calving'} /> 
             <CalvingBookTable closeToCalving={props.yetToCalf} heading={'Not Close'} />
             <CalvingBookTable closeToCalving={props.alreadyCalved} heading={'Already Calved'} />

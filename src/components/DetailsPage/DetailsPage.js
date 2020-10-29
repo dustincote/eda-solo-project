@@ -77,7 +77,8 @@ function DetailsPage(props) {
 
 
     return (
-        <Grid container justify='center'>
+        <Grid container direction='column' justify='center' alignItems='center'>
+        <h1>Details for {animal[0] && animal[0]. tag_number}</h1>
         <Card className={classes.root}>
             {console.log(animal)}
             {console.log(dam)}
@@ -100,7 +101,7 @@ function DetailsPage(props) {
                 </Typography>
                 <ul>
                     {animalsCalves.map(a => 
-                        <li key={a.animal_id}>Tag Number: {a.tag_number} Gender: {a.gender}<Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={() => details(a.animal_id)}>Details</Button></li>)}
+                        <li key={a.animal_id}>Tag Number: {a.tag_number} Gender: {a.gender}{'  '}<Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={() => details(a.animal_id)}>Details</Button></li>)}
                     </ul>
                 {addNewNote ? <><TextField
                     onChange={(event)=> setNote(event.target.value)}
@@ -120,7 +121,7 @@ function DetailsPage(props) {
                             props.animalNotes.map(
                                 note => 
                                     <span key={note.note_id}>
-                                        {note.note}<Button onClick={() => deleteNote(note.note_id)}>Delete Note</Button><br/>
+                                        {note.note}{'  '}<Button onClick={() => deleteNote(note.note_id)}>Delete Note</Button><br/>
                                     </span>) 
                                 : 'none'}
                 </Typography>

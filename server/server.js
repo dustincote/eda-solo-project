@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const animalRouter = require('./routes/animal.router');
+const weatherRouter = require('./routes/weather.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -24,6 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
+app.use('/api/weather', weatherRouter);
 app.use('/api/user', userRouter);
 app.use('/api/animal', animalRouter); 
 

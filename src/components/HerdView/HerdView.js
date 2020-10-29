@@ -82,7 +82,9 @@ const HerdView = (props) => {
                 direction='column'
                 alignItems="center"
                 spacing={0}
-            >   <FormLabel>Select Filter</FormLabel>
+            >  
+                <h1>Herd View</h1>
+                <FormLabel>Select Filter</FormLabel>
                 <Select style={{width: 'auto'}} value={filterHerd} onChange={(e) => setFilterHerd(e.target.value)}>
                     <MenuItem value={false}>All</MenuItem>
                     <MenuItem value="cow">Cows</MenuItem>

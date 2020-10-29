@@ -12,7 +12,10 @@ class UserPage extends Component {
   render() {
     return (
      <>
+        
         <Grid container direction='column' alignItems='center' justify='center' spacing={6}  wrap='wrap'>
+          <h1>Home</h1>
+
             <CalvingBookTable closeToCalving={this.props.closeToCalving} heading={'Close To Calving'} />
 
             <CalvingBookTable closeToCalving={this.props.yetToCalf} heading={'Not Close'} />

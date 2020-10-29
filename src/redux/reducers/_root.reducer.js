@@ -7,6 +7,7 @@ import allNotes from './allNotes.reducer';
 import alreadyCalved from './alreadyCalved.reducer';
 import yetToCalf from './yetToCalfReducer'
 import closeToCalving from './closeToCalving.reducer';
+import weather from './weather.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   alreadyCalved,
   yetToCalf,
   closeToCalving,
+  weather,
 });
 
 export default rootReducer;
