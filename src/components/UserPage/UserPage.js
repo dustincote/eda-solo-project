@@ -5,6 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import CalvingBookItem from '../CalvingBook/CalvingBookItem';
 import CalvingBookTable from '../CalvingBook/CalvingBookTable';
 import Grid from '@material-ui/core/Grid';
+import { XYPlot, ArcSeries, XAxis, YAxis } from 'react-vis';
 
 class UserPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
