@@ -19,7 +19,8 @@ CREATE TABLE "notes" (
 	"note_id" serial PRIMARY KEY,
 	"note" TEXT NOT NULL,
 	"animal_id" integer REFERENCES "animals",
-	"date" TIMESTAMP DEFAULT current_timestamp
+	"date" TIMESTAMP DEFAULT current_timestamp,
+	"user_id" integer REFERENCES "user"
 );
 
 CREATE TABLE "animals" (

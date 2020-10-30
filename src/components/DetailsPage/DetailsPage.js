@@ -16,7 +16,6 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
-
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
@@ -90,29 +89,24 @@ function DetailsPage(props) {
             <hr/>
         </div>
         <Grid container direction='column' justify='center' alignItems='center'>
-        <Card className={classes.root}>
-            {console.log(animal)}
-            {console.log(dam)}
-            {console.log(typeof animal_id)}
-            {console.log('current calves', currentCalves)}
-            {console.log('this animals calves', animalsCalves)}
+        {animal[0] && <Card className={classes.root}>
             <CardContent>
                 <Typography className={classes.title} color="textPrimary" gutterBottom>
-                    Tag number: {animal[0] != undefined && animal[0].tag_number}
+                    Tag number: {animal[0].tag_number}
                 </Typography>
 
                 <Typography>
-                    Gender: {animal[0] ? animal[0].gender : 'None'}
+                    Gender: {animal[0].gender}
                 </Typography>
                 <Typography>
                     Dam Tag Number: {dam[0] ? dam[0].tag_number : 'None'}
                 </Typography>
-                {animal[0] && (animal[0].gender === 'bull' || animal[0].gender === 'steer' || animal[0].calf ) ? <></> : <><Typography className={classes.pos} color="textPrimary">
+                {(animal[0].gender === 'bull' || animal[0].gender === 'steer' || animal[0].calf ) ? <></> : <><Typography className={classes.pos} color="textPrimary">
                     Calves:
                 </Typography>
                 <ul>
                     {animalsCalves.map(a => 
-                        <li key={a.animal_id}>Tag Number: {a.tag_number} Gender: {a.gender}{'  '}<Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={() => details(a.animal_id)}>Details</Button></li>)}
+                        <li key={a.animal_id}>Tag Number: {a.tag_number} Gender: {a.gender}{'  '}<IconButton style={{ fontSize: 10, color:'blue' }} size="small" variant='contained' onClick={() => details(a.animal_id)}>Details</IconButton></li>)}
                     </ul></>}
                 
 
@@ -121,7 +115,7 @@ function DetailsPage(props) {
                             props.animalNotes.map(
                                 note => 
                                     <span key={note.note_id}>
-                                        {note.note}{' '}<IconButton  onClick={() => deleteNote(note.note_id)}><DeleteForeverIcon style={{fontSize:15}}/></IconButton><br/>
+                                        {note.note}{' '}<IconButton onClick={() => deleteNote(note.note_id)}><DeleteForeverIcon style={{ fontSize: 15, color: '#A61D2C'}}/></IconButton><br/>
                                     </span>) 
                                 : 'none'}
                 </Typography>
@@ -139,7 +133,7 @@ function DetailsPage(props) {
             </CardContent>
             <CardActions>
             </CardActions>
-        </Card>
+        </Card>}
                 </Grid>
         <div style={{textAlign:'center', marginTop:20}}>
             

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import CalvingBookTable from '../CalvingBook/CalvingBookTable';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -27,6 +25,7 @@ const useStyles = makeStyles({
 
 
 const UserPage = (props) => {
+  useEffect(() => {props.dispatch({type: 'GET_ALL_NOTES'})},[])
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
   useEffect(() => {setHeiferCalves(props.herd.filter(cow => cow.calf && !cow.archived && cow.gender === 'heifer'))},[props.herd]);
   useEffect(() => {setBullCalves(props.herd.filter(cow => cow.calf && !cow.archived && cow.gender != 'heifer'))},[props.herd]);
@@ -86,8 +85,19 @@ const UserPage = (props) => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Card>
+           </Card>
             </Paper>
+            <Grid style={{marginTop:40,}} item>
+              {props.notes[0] && <Card><Grid container justify='center'>
+                <Grid item xs={10} style={{textAlign:'center'}}>
+                <Typography className={classes.heading}>Recent Notes</Typography>
+                </Grid>
+                <Grid item xs={10} style={{ textAlign: 'left' }}>
+                {props.notes.map(note => <Typography>{note.note}</Typography>)}
+                </Grid>
+              </Grid>
+              </Card>}
+            </Grid>
           </Grid>
 
             {/* <CalvingBookTable closeToCalving={props.closeToCalving} heading={'Close To Calving'} />
@@ -107,6 +117,7 @@ const map = (state) => ({
   yetToCalf: state.yetToCalf,
   alreadyCalved: state.alreadyCalved,
   herd: state.herd,
+  notes: state.allNotes,
 })
 // this allows us to use <App /> in index.js
 export default connect(map)(UserPage);

@@ -5,7 +5,7 @@ const { rejectUnauthenticated,} = require('../modules/authentication-middleware'
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText =`SELECT * FROM "animals" WHERE "user_id"=$1 ORDER BY "tag_number";`
+  let queryText =`SELECT * FROM "animals" WHERE "user_id"=$1 AND "archived"='false' ORDER BY "tag_number";`
   pool.query(queryText,[req.user.id]).then(result => res.send(result.rows))
   .catch(e => {
     console.log('error getting animals', e);
@@ -86,11 +86,19 @@ router.get('/note/:id', rejectUnauthenticated,(req, res) => {
   });
 });//end get route to /api/animal/note/:id
 
+router.get('/note', rejectUnauthenticated, (req, res) => {
+  let queryText = `SELECT * FROM "notes" WHERE "user_id"=$1;`
+  pool.query(queryText, [req.user.id]).then(result => res.send(result.rows)).catch(e => {
+    console.log('error getting all notes', e);
+    res.sendStatus(500);
+  })
+})
+
 
 //post route to /api/animal/note this is used to add a note to an animal
 router.post('/note', rejectUnauthenticated, (req, res) => {
-  let queryText = `INSERT INTO "notes" ("note", "animal_id") VALUES ($1, $2);`
-  pool.query(queryText, [req.body.note, req.body.animal_id]).then(result => res.sendStatus(201)).catch(e => {
+  let queryText = `INSERT INTO "notes" ("note", "animal_id", "user_id") VALUES ($1, $2, $3);`
+  pool.query(queryText, [req.body.note, req.body.animal_id, req.user.id]).then(result => res.sendStatus(201)).catch(e => {
     console.log('error posting note', e);
     res.sendStatus(500);
   })
