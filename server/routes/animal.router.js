@@ -87,7 +87,7 @@ router.get('/note/:id', rejectUnauthenticated,(req, res) => {
 });//end get route to /api/animal/note/:id
 
 router.get('/note', rejectUnauthenticated, (req, res) => {
-  let queryText = `SELECT * FROM "notes" WHERE "user_id"=$1;`
+  let queryText = `SELECT * FROM "notes" WHERE "user_id"=$1 LIMIT 10;`
   pool.query(queryText, [req.user.id]).then(result => res.send(result.rows)).catch(e => {
     console.log('error getting all notes', e);
     res.sendStatus(500);

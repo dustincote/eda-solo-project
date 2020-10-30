@@ -85,7 +85,7 @@ return(
             </Card>}
         </Grid>
             <Grid item style={{alignSelf:'flex-end'}}>
-                &copy; <img id='logo' src='herdsman.png' />
+                &copy; Herdsman
             </Grid>
     </Grid>
 </footer>

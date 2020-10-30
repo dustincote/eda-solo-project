@@ -2,7 +2,7 @@
   font-size: 24px;
   font-weight: 700;
   display: inline-block;
-  color: #f2f2f2;
+  color: white;
   padding-left: 10px;
 }
 
@@ -14,20 +14,17 @@
   width: 100%;
   z-index: 100;
 }
-#logo{
-  width:60px;
+
+#logo {
+  width: 60px;
   margin-left: 20px;
 }
 
 .sticky {}
 
-.active {
-  background-color: maroon;
-}
-
 .nav-link {
   float: left;
-  color: #f2f2f2;
+  color: black;
   background-color: #A61D2C;
   text-align: center;
   padding: 24px 10px;
@@ -38,6 +35,10 @@
   border: none;
   cursor: pointer;
   outline: 0;
+}
+
+.active {
+  color: white;
 }
 
 .nav-link:hover {

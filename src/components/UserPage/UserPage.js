@@ -47,10 +47,9 @@ const UserPage = (props) => {
   
     return (
      <>
-      {console.log(heiferCalves)}
-      {console.log(bullCalves)}
+
         <div style={{ textAlign: 'center', marginBottom: 40, marginLeft: 20, marginRight: 20 }}>         
-          <h1>Welcome to Herdsman</h1>
+          <img src='herdsman.png' id='welcome-img'/>
           <hr/>
         </div>
         <Grid container direction='column' alignItems='center' justify='center'   >
