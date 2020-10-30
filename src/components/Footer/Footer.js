@@ -27,10 +27,11 @@ const useStyles = makeStyles({
     },
     card:{
         minWidth: 150,
-        backgroundColor:'#A61D2C',
+        backgroundColor:'#0384fc',
         color:'white',
         height: 100,
-        padding: 0
+        padding: 0,
+        marginBottom: 5,
 
     },
     weather:{
