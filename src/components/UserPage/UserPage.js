@@ -50,7 +50,7 @@ const UserPage = (props) => {
       {console.log(heiferCalves)}
       {console.log(bullCalves)}
         <div style={{ textAlign: 'center', marginBottom: 40, marginLeft: 20, marginRight: 20 }}>         
-          <h1>Welcome To Herdsman</h1>
+          <h1>Welcome to Herdsman</h1>
           <hr/>
         </div>
         <Grid container direction='column' alignItems='center' justify='center'   >

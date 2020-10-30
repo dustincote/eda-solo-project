@@ -29,6 +29,8 @@ const useStyles = makeStyles({
         minWidth: 150,
         backgroundColor:'#A61D2C',
         color:'white',
+        height: 100,
+        padding: 0
 
     },
     weather:{
@@ -83,7 +85,7 @@ return(
             </Card>}
         </Grid>
             <Grid item style={{alignSelf:'flex-end'}}>
-                    &copy; Herdsman
+                &copy; <img id='logo' src='herdsman.png' />
             </Grid>
     </Grid>
 </footer>

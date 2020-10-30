@@ -114,3 +114,9 @@ input {
   margin-bottom: 10px;
 }
 
+#welcome-img {
+  width: 100px;
+}
+#welcome {
+  font-size: 25;
+}
