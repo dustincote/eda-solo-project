@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
@@ -18,35 +18,35 @@ const Nav = (props) => {
 
   return (
     <div className="nav">
-      <Link to="/home">
+      <NavLink to="/home">
         <h2 className="nav-title">Herdsman</h2>
-      </Link>
+      </NavLink>
       <div className="nav-right">
-        <Link className="nav-link" to={loginLinkData.path}>
+        <NavLink className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
-        </Link>
+        </NavLink>
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>
-            <Link className="nav-link" to="/info">
+            <NavLink className="nav-link" to="/info">
               Info Page
-            </Link>
-            <Link className="nav-link" to="/herd">
+            </NavLink>
+            <NavLink className="nav-link" to="/herd">
               Herd
-            </Link>
-            <Link className="nav-link" to="/calvingbook">
+            </NavLink>
+            <NavLink className="nav-link" to="/calvingbook">
               CalvingBook
-            </Link>
+            </NavLink>
             <LogOutButton className="nav-link" />
           </>
         )}
         {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
+        <NavLink className="nav-link" to="/about">
           About
-        </Link>
+        </NavLink>
       </div>
     </div>
   );

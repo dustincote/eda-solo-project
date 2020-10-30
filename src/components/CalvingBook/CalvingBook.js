@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
 const CalvingBook = (props) => {
     const classes = useStyles();
     useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
+    useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
+
 
 
 
@@ -46,6 +48,10 @@ const CalvingBook = (props) => {
         <>
             {/* {console.log(rows())}
             {console.log(props)} */}
+            <div style={{ textAlign: 'center', marginBottom: 40, marginLeft: 20, marginRight: 20 }}>
+                <h1>Calving Book</h1>
+                <hr />
+            </div>
             <Grid
                 className={classes.grid}
                 container
@@ -53,7 +59,7 @@ const CalvingBook = (props) => {
                 alignItems="center"
                 spacing={5}
             > 
-            <h1>Calving Book</h1>
+ 
             <CalvingBookTable closeToCalving={props.closeToCalving} heading={'Close To Calving'} /> 
             <CalvingBookTable closeToCalving={props.yetToCalf} heading={'Not Close'} />
             <CalvingBookTable closeToCalving={props.alreadyCalved} heading={'Already Calved'} />

@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
 //in table form
 const HerdView = (props) => {
     const classes = useStyles();
-    useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
+    useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, []);
+    useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
+
 
     //set up state for the filter function of the component
     const [filterHerd, setFilterHerd] = useState(false);
@@ -76,6 +78,10 @@ const HerdView = (props) => {
             <>
             {/* {console.log(rows())}
             {console.log(props)} */}
+            <div style={{textAlign:'center', marginBottom:40, marginLeft:20, marginRight:20}}>                
+                <h1>Herd View</h1>
+                <hr/>
+            </div>
             <Grid
                 className={classes.grid}
                 container
@@ -83,7 +89,6 @@ const HerdView = (props) => {
                 alignItems="center"
                 spacing={0}
             >  
-                <h1>Herd View</h1>
                 <FormLabel>Select Filter</FormLabel>
                 <Select style={{width: 'auto'}} value={filterHerd} onChange={(e) => setFilterHerd(e.target.value)}>
                     <MenuItem value={false}>All</MenuItem>

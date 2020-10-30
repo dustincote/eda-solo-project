@@ -14,6 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
+import swal from 'sweetalert';
 
 
 
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 //this is the component that will display all of the movies
 //we will dispatch to get movies and genres on loading of the component
 const CowForm = (props) => {
+    useEffect(()=>{window.scrollTo({top:0,behavior:'smooth'})},[]);
     const classes = useStyles();
     const [newCow, setCow] = useState({
         tag_number: '',
@@ -71,7 +73,12 @@ const CowForm = (props) => {
             calf: false,
         });
         setNote('');
+        swal('Successfully added animal',{ timer: 1500, buttons:false, icon:'success'});
         props.history.push('/herd')
+    }
+
+    const goBack = () => {
+        props.history.goBack()
     }
 
     return (
@@ -83,7 +90,7 @@ const CowForm = (props) => {
             spacing={0}
 
         >
-            <Grid item xs={4} >
+                <Grid item xs={12} sm={6} md={4} >
                 <Paper>
                     <Grid container justify="center">
 
@@ -132,7 +139,8 @@ const CowForm = (props) => {
                                     value={note}
                                 /><br /><br />
                                 <Grid item style={{ textAlign: 'center', marginBottom: 15 }}>
-                                    <Button type="submit" color="primary" variant="contained">Submit</Button>
+                                    <Button type="submit" color="primary" variant="contained">Submit</Button>{'  '}
+                                    <Button color="primary" variant="contained" onClick={goBack}>Cancel</Button>
                                 </Grid>
                             </form>
                         </Grid>

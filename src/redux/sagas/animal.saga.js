@@ -1,5 +1,6 @@
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import Axios from 'axios';
+import swal from 'sweetalert';
 
 
 //this saga is used to add a note to an animal action.payload should look like
@@ -22,7 +23,10 @@ function* addCow(action) {
         yield put({ type: 'ADD_NOTE', payload: { animal_id: response.data.animal_id, note: action.payload.note } })}
 
         yield put({ type: 'GET_HERD' })
-    } catch (e) { console.log('error adding cow', e) };
+    } catch (e) { console.log('error adding cow', e) 
+        swal('Error Adding Cow', { timer: 1500, buttons: false, icon: 'error' });
+
+};
 };
 
 function* addCalf(action) {
@@ -32,7 +36,10 @@ function* addCalf(action) {
             yield put({ type: 'ADD_NOTE', payload: { animal_id: response.data.animal_id, note: action.payload.note } })
         };
         yield put({ type: 'GET_HERD' })
-    } catch (e) { console.log('error adding cow', e) };
+    } catch (e) {
+        console.log('error adding cow', e)
+        swal('Error Adding Calf', { timer: 1500, buttons: false, icon: 'error' });
+ };
 };
 
 function* fetchHerd(action) {

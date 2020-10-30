@@ -12,6 +12,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import moment from 'moment';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+
 
 const useStyles = makeStyles({
     root: {
@@ -23,7 +27,7 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 14,
+        fontSize: 20,
     },
     pos: {
         marginBottom: 12,
@@ -37,10 +41,10 @@ function DetailsPage(props) {
     const [currentCalves, setCurrentCalves]= useState([]);
     const [animalsCalves, setAnimalsCalves] = useState([]);
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
     const [addNewNote, setAddNewNote]= useState(false);
     const [note, setNote] = useState('');
 
+    useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
     useEffect(() => { setAnimal(props.herd.filter(a => a.animal_id === Number(animal_id)))},[props.herd, animal_id]);
     useEffect(() => { animal[0] && setDam(props.herd.filter(a => a.animal_id === Number(animal[0].dam_id)))},[animal]);
     useEffect(() => { setCurrentCalves(props.herd.filter(a => a.calf && !a.archived))},[props.herd, animal_id]);
@@ -52,7 +56,7 @@ function DetailsPage(props) {
         props.history.push(`/details/${id}`)
     }
     const backToHerd = () => {
-        props.history.push('/herd')
+        props.history.goBack();
     }
 
     const handleCheck = () => {
@@ -74,11 +78,18 @@ function DetailsPage(props) {
         setAddNewNote(false);
         setNote('');
     }
+    const cancelNote = () => {
+        setAddNewNote(false);
+    }
 
 
     return (
+        <>
+        <div style={{textAlign:'center', marginBottom:40, marginLeft:20, marginRight:20}}>
+            <h1>Details for {animal[0] && animal[0].tag_number}</h1>
+            <hr/>
+        </div>
         <Grid container direction='column' justify='center' alignItems='center'>
-        <h1>Details for {animal[0] && animal[0]. tag_number}</h1>
         <Card className={classes.root}>
             {console.log(animal)}
             {console.log(dam)}
@@ -86,7 +97,7 @@ function DetailsPage(props) {
             {console.log('current calves', currentCalves)}
             {console.log('this animals calves', animalsCalves)}
             <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                <Typography className={classes.title} color="textPrimary" gutterBottom>
                     Tag number: {animal[0] != undefined && animal[0].tag_number}
                 </Typography>
 
@@ -96,32 +107,21 @@ function DetailsPage(props) {
                 <Typography>
                     Dam Tag Number: {dam[0] ? dam[0].tag_number : 'None'}
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
+                {animal[0] && (animal[0].gender === 'bull' || animal[0].gender === 'steer' || animal[0].calf ) ? <></> : <><Typography className={classes.pos} color="textPrimary">
                     Calves:
                 </Typography>
                 <ul>
                     {animalsCalves.map(a => 
                         <li key={a.animal_id}>Tag Number: {a.tag_number} Gender: {a.gender}{'  '}<Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={() => details(a.animal_id)}>Details</Button></li>)}
-                    </ul>
-                {addNewNote ? <><TextField
-                    onChange={(event)=> setNote(event.target.value)}
-                    id="outlined-multiline-static"
-                    label="Notes"
-                    multiline
-                    rows={4}
-                    variant="outlined"
-                    value={note}
-                />
-                <Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={submitNote}>Submit</Button></>
-                :
-                <Button variant='contained' style={{ fontSize: 10 }} size="small" onClick={() => setAddNewNote(true)}>Add New Note</Button> }
+                    </ul></>}
+                
 
-                <Typography className={classes.pos} color="textSecondary">
-                    Notes: {props.animalNotes ? 
+                <Typography className={classes.pos} color="textPrimary">
+                    Notes:<br/> {props.animalNotes ? 
                             props.animalNotes.map(
                                 note => 
                                     <span key={note.note_id}>
-                                        {note.note}{'  '}<Button onClick={() => deleteNote(note.note_id)}>Delete Note</Button><br/>
+                                        {note.note}{' '}<IconButton  onClick={() => deleteNote(note.note_id)}><DeleteForeverIcon style={{fontSize:15}}/></IconButton><br/>
                                     </span>) 
                                 : 'none'}
                 </Typography>
@@ -138,10 +138,29 @@ function DetailsPage(props) {
                         />} />}
             </CardContent>
             <CardActions>
-                <Button variant='contained' style={{fontSize: 10}} size="small" onClick={backToHerd}>Back to Herd</Button>
             </CardActions>
         </Card>
-        </Grid>
+                </Grid>
+        <div style={{textAlign:'center', marginTop:20}}>
+            
+            {addNewNote ? <><TextField
+                onChange={(event) => setNote(event.target.value)}
+                id="outlined-multiline-static"
+                label="Notes"
+                multiline
+                rows={4}
+                variant="outlined"
+                value={note}
+            /><br/>
+                <Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={submitNote}>Submit</Button>{'  '}
+                <Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={cancelNote}>Cancel</Button></>
+                :
+                <>
+                        <Button variant='contained' style={{ fontSize: 10 }} size="small" onClick={backToHerd}><ArrowBackIcon style={{fontSize:15}} /> Back</Button>{'  '}
+                <Button variant='contained' style={{ fontSize: 10 }} size="small" onClick={() => setAddNewNote(true)}>Add New Note</Button>
+                </>}
+            </div>
+                </>
     );
 }
 

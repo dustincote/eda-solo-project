@@ -1,6 +1,4 @@
-html,
-body,
-#react-root {
+html, body, #react-root {
   height: 100%;
 }
 
@@ -60,6 +58,7 @@ Button
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
+
 .btn_asLink {
   padding: 0;
   border-width: 0;
@@ -68,6 +67,10 @@ Button
   background: none;
   font: inherit;
   color: #444;
+}
+
+.header-div {
+  height: 100px;
 }
 
 .btn_asLink:hover {
@@ -110,3 +113,4 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+

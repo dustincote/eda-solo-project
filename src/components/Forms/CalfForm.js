@@ -17,6 +17,7 @@ import { useParams } from 'react-router';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
 //we use parameters on the url to determine which cow
 //we are trying to add a calf for
 const CalfForm = (props) => {
+    useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
+
     //pull parameters off of url
     const { dam_id } = useParams();
 
@@ -119,6 +122,8 @@ const CalfForm = (props) => {
             calf: true,
             birthweight: '',
         });
+        swal('Successfully Added Calf', { timer: 1500, buttons: false, icon: 'success' });
+
         setCalfNote('');
         if(cowNote != ''){
             props.dispatch({type:'ADD_NOTE', payload:{note: cowNote, animal_id: dam_id}});
@@ -128,6 +133,10 @@ const CalfForm = (props) => {
     }
     useEffect(() => { setDam(props.herd.filter(cow => cow.animal_id === Number(dam_id)))},[props.herd])
     useEffect(() => { props.dispatch({type:'GET_HERD'})}, [])
+
+    const goBack = () => {
+        props.history.goBack()
+    }
 
 
 
@@ -141,11 +150,11 @@ const CalfForm = (props) => {
                 spacing={0}
 
             >
-                <Grid item xs={4} style={{ marginTop: 25 }} >
+                <Grid item xs={12} sm={6} md={4} style={{ marginTop: 25 }} >
                     <Paper>
                         <Grid container justify="center">
 
-                            <Grid item xs={8} style={{textAlign:'center'}} >
+                            <Grid item xs={8}  style={{textAlign:'center'}} >
                                 <Typography style={{marginTop: 15}} variant="subtitle1">
                                     Enter Calf Information for Cow# {dam != null && dam[0] && dam[0].tag_number}
                                 </Typography>
@@ -231,7 +240,9 @@ const CalfForm = (props) => {
                                         value={cowNote}
                                     /><br /><br />
                                     <Grid item style={{ textAlign: 'center', marginBottom: 15 }}>
-                                        <Button type="submit" color="primary" variant="contained">Submit</Button>
+                                        <Button type="submit" color="primary" variant="contained">Submit</Button>{'  '}
+                                        <Button color="primary" variant="contained" onClick={goBack}>Cancel</Button>
+
                                     </Grid>
                                 </form>
                             </Grid>

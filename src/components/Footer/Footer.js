@@ -11,7 +11,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 const useStyles = makeStyles({
     root: {
-        marginBottom: 2,
+        
         paddingBottom: 0,
     },
     bullet: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     },
     card:{
         minWidth: 150,
-        backgroundColor:'blue',
+        backgroundColor:'#A61D2C',
         color:'white',
 
     },
@@ -63,6 +63,7 @@ return(
 
 
 <footer className={classes.root}>
+    <hr/>
     <Grid container className={classes.root} justify='space-between' >
         <Grid item xs={2}>
             {props.weather.weather &&
