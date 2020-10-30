@@ -20,7 +20,7 @@ function* addCow(action) {
     try {
         const response = yield Axios.post('/api/animal/cow', action.payload.newCow);
         if(action.payload.note != ""){
-        yield put({ type: 'ADD_NOTE', payload: { animal_id: response.data.animal_id, note: action.payload.note } })}
+        yield put({ type: 'ADD_NOTE', payload: {tag_number:response.data.tag_number, animal_id: response.data.animal_id, note: action.payload.note } })}
 
         yield put({ type: 'GET_HERD' })
     } catch (e) { console.log('error adding cow', e) 
@@ -33,7 +33,7 @@ function* addCalf(action) {
     try {
         const response = yield Axios.post('/api/animal/calf', action.payload.newCalf);
         if (action.payload.note != "") {
-            yield put({ type: 'ADD_NOTE', payload: { animal_id: response.data.animal_id, note: action.payload.note } })
+            yield put({ type: 'ADD_NOTE', payload: {tag_number: response.data.tag_number, animal_id: response.data.animal_id, note: action.payload.note } })
         };
         yield put({ type: 'GET_HERD' })
     } catch (e) {

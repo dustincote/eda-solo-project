@@ -32,7 +32,10 @@ const useStyles = makeStyles({
         marginBottom: 12,
     },
 });
-
+//component will take in an id of an animal on the url
+//then set the animal by filtering the herd, display information about the
+//animal, filter the herd again to find the mother of the animal
+//
 function DetailsPage(props) {
     const { animal_id } = useParams();
     const [animal, setAnimal] = useState([]);
@@ -73,7 +76,7 @@ function DetailsPage(props) {
 
     const submitNote = () => {
         console.log({note: note, animal_id: animal_id})
-        props.dispatch({type: 'ADD_NOTE', payload:{note: note, animal_id: animal_id}});
+        props.dispatch({ type: 'ADD_NOTE', payload: { note: note, animal_id: animal_id, tag_number: animal[0].tag_number}});
         setAddNewNote(false);
         setNote('');
     }

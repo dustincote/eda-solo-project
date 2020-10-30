@@ -37,7 +37,7 @@ router.post('/cow', rejectUnauthenticated, (req, res) => {
     ("dam_id", "sire_id", "tag_number", "gender", "user_id", "birth_date", "disposition", "calving_ease", "castrated", "birthweight",  "calf", "close_to_calving" )
     VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`
   pool.query(queryText, values).then(result => {
-    res.send({ animal_id: result.rows[0].animal_id });
+    res.send({ animal_id: result.rows[0].animal_id, tag_number: result.rows[0].tag_number });
     console.log(result.rows[0].animal_id)
   }).catch(err => {
     console.log('error posting cow', err);
@@ -69,7 +69,7 @@ router.post('/calf', rejectUnauthenticated, (req, res) => {
     ("dam_id", "sire_id", "tag_number", "gender", "user_id", "birth_date", "calving_ease", "castrated", "birthweight",  "calf", "status" )
     VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`
   pool.query(queryText, values).then(result => {
-    res.send({ animal_id: result.rows[0].animal_id });
+    res.send({ animal_id: result.rows[0].animal_id, tag_number: result.rows[0].tag_number});
     console.log(result.rows[0].animal_id)
   }).catch(err => {
     console.log('error posting cow', err);
@@ -97,8 +97,8 @@ router.get('/note', rejectUnauthenticated, (req, res) => {
 
 //post route to /api/animal/note this is used to add a note to an animal
 router.post('/note', rejectUnauthenticated, (req, res) => {
-  let queryText = `INSERT INTO "notes" ("note", "animal_id", "user_id") VALUES ($1, $2, $3);`
-  pool.query(queryText, [req.body.note, req.body.animal_id, req.user.id]).then(result => res.sendStatus(201)).catch(e => {
+  let queryText = `INSERT INTO "notes" ("note", "animal_id", "user_id", "tag_number") VALUES ($1, $2, $3,$4);`
+  pool.query(queryText, [req.body.note, req.body.animal_id, req.user.id, req.body.tag_number]).then(result => res.sendStatus(201)).catch(e => {
     console.log('error posting note', e);
     res.sendStatus(500);
   })

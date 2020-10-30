@@ -11,6 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   card:{
@@ -18,6 +19,14 @@ const useStyles = makeStyles({
   },
   heading:{
     fontSize: 24,
+  }, 
+  container: {
+    maxHeight: 300,
+    width: 'auto',
+    textAlign: 'center',
+  },
+  notes:{
+    marginTop: 40,
   },
 })
 
@@ -67,17 +76,17 @@ const UserPage = (props) => {
                     <Typography>
                 {props.alreadyCalved.length} Already Calved
               </Typography>
-            <TableContainer >
-              <Table className={classes.table} aria-label="simple table">
+            <TableContainer className={classes.container}>
+              <Table className={classes.table}>
                 <TableHead>
-                  <TableRow>
+                  <TableRow key='calf-header'>
                     <TableCell align='center'>Total Calves</TableCell>
                     <TableCell align="center">Bull/Steer</TableCell>
                     <TableCell align="center">Heifer</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow >
+                    <TableRow key='calf-data'>
                       <TableCell align='center' scope="row">{heiferCalves.length + bullCalves.length}</TableCell>
                       <TableCell align="center">{bullCalves.length}</TableCell>
                       <TableCell align="center">{heiferCalves.length}</TableCell>
@@ -87,17 +96,40 @@ const UserPage = (props) => {
             </TableContainer>
            </Card>
             </Paper>
-            <Grid style={{marginTop:40,}} item>
-              {props.notes[0] && <Card><Grid container justify='center'>
-                <Grid item xs={10} style={{textAlign:'center'}}>
-                <Typography className={classes.heading}>Recent Notes</Typography>
-                </Grid>
-                <Grid item xs={10} style={{ textAlign: 'left' }}>
-                {props.notes.map(note => <Typography>{note.note}</Typography>)}
-                </Grid>
-              </Grid>
-              </Card>}
-            </Grid>
+
+              {props.notes[0] && 
+                
+                <Paper className={classes.notes}>
+                <Typography style={{textAlign:'center'}} className={classes.heading}>Recent Notes</Typography><hr/>
+                  <TableContainer className={classes.container} >
+                    <Table stickyHeader className={classes.table}>
+                      <TableHead>
+                        <TableRow key='note-table'>
+                          <TableCell align='center'>Tag Number</TableCell>
+                          <TableCell align="center">Note</TableCell>
+                          <TableCell align="center">Details</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {props.notes.map(note => 
+                        <TableRow key={note.note_id} >
+                          <TableCell align='center' scope="row">{note.tag_number}</TableCell>
+                          <TableCell style={{fontSize:12}} align="center">{note.note}</TableCell>
+                          <TableCell align="center">
+                            <Button
+                              variant='contained' 
+                              color='primary' 
+                              style={{fontSize:10}} 
+                              size='small'
+                              onClick={() => props.history.push(`/details/${note.animal_id}`)}
+                              >Go to Animal</Button></TableCell>
+                        </TableRow>)}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+              </Paper>
+                
+            }
           </Grid>
 
             {/* <CalvingBookTable closeToCalving={props.closeToCalving} heading={'Close To Calving'} />
