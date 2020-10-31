@@ -23,11 +23,18 @@ const useStyles = makeStyles({
   container: {
     maxHeight: 300,
     width: 'auto',
+    minWidth: 300,
+    maxWidth: 350,
     textAlign: 'center',
   },
   notes:{
     marginTop: 40,
+    minWidth: 300,
+    maxWidth: 350,
   },
+  table:{
+    minWidth: 300
+  }
 })
 
 
@@ -53,7 +60,7 @@ const UserPage = (props) => {
           <hr/>
         </div>
         <Grid container direction='column' alignItems='center' justify='center'   >
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Paper>
           <Card variant='elevation' className={classes.card} style={{textAlign:'center'}}>
                 <Typography className={classes.heading}>
@@ -95,9 +102,10 @@ const UserPage = (props) => {
             </TableContainer>
            </Card>
             </Paper>
+          </Grid>
 
               {props.notes[0] && 
-                
+                <Grid item xs={12}>
                 <Paper className={classes.notes}>
               <Typography style={{ textAlign: 'center' }} className={classes.heading}>Recent Notes</Typography><hr style={{ marginLeft: 15, marginRight: 15 }}/>
                   <TableContainer className={classes.container} >
@@ -127,13 +135,9 @@ const UserPage = (props) => {
                     </Table>
                   </TableContainer>
               </Paper>
-                
+                </Grid>
             }
-          </Grid>
 
-            {/* <CalvingBookTable closeToCalving={props.closeToCalving} heading={'Close To Calving'} />
-
-            <CalvingBookTable closeToCalving={props.yetToCalf} heading={'Not Close'} /> */}
 
         </Grid>
          </>
