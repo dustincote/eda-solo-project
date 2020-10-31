@@ -8,6 +8,8 @@ import alreadyCalved from './alreadyCalved.reducer';
 import yetToCalf from './yetToCalfReducer'
 import closeToCalving from './closeToCalving.reducer';
 import weather from './weather.reducer';
+import pastures from './pastures.reducer';
+import pastureRecords from './pastureRecords.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -26,6 +28,8 @@ const rootReducer = combineReducers({
   yetToCalf,
   closeToCalving,
   weather,
+  pastures,
+  pastureRecords, 
 });
 
 export default rootReducer;

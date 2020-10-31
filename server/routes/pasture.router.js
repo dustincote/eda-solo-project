@@ -7,9 +7,17 @@ const router = express.Router();
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * FROM "pastures" WHERE "user_name"=$1`
+    let queryText = `SELECT * FROM "pastures" WHERE "user_id"=$1;`
     pool.query(queryText, [req.user.id]).then(result => res.send(result.rows)).catch(e => {
         console.log('error getting pastures', e);
+        res.sendStatus(500);
+    });
+});
+
+router.get('/records', rejectUnauthenticated, (req, res) => {
+    let queryText = `SELECT * FROM "pasture_records" WHERE "user_id"=$1 AND "date_out" is null;`;
+    pool.query(queryText, [req.user.id]).then(result => res.send(result.rows)).then(e => {
+        console.log('error getting pasture records', e);
         res.sendStatus(500);
     });
 });
@@ -18,6 +26,7 @@ router.post('/', rejectUnauthenticated, (req, res) =>{
     let queryText= `INSERT INTO "pastures" ("pasture_name", "user_id") VALUES ($1, $2);`
     pool.query(queryText, [ req.body.pasture_name , req.user.id]).then(result => res.sendStatus(201)).catch(e => {
         console.log('error posting pasture', e);
+        res.sendStatus(500);
     })
 })
 

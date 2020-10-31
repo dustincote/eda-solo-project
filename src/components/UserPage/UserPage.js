@@ -58,7 +58,7 @@ const UserPage = (props) => {
           <Card variant='elevation' className={classes.card} style={{textAlign:'center'}}>
                 <Typography className={classes.heading}>
                 Calving Dashboard<br/>
-            </Typography>
+            </Typography><hr style={{marginLeft: 15, marginRight: 15}}/>
 
               <Typography>
               {((props.alreadyCalved.length / totalCows.length)*100).toFixed(2)+'%'} Done Calving<br/>
@@ -99,7 +99,7 @@ const UserPage = (props) => {
               {props.notes[0] && 
                 
                 <Paper className={classes.notes}>
-                <Typography style={{textAlign:'center'}} className={classes.heading}>Recent Notes</Typography><hr/>
+              <Typography style={{ textAlign: 'center' }} className={classes.heading}>Recent Notes</Typography><hr style={{ marginLeft: 15, marginRight: 15 }}/>
                   <TableContainer className={classes.container} >
                     <Table stickyHeader className={classes.table}>
                       <TableHead>

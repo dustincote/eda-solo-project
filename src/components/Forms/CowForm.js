@@ -73,7 +73,6 @@ const CowForm = (props) => {
             calf: false,
         });
         setNote('');
-        swal('Successfully added animal',{ timer: 1500, buttons:false, icon:'success'});
         props.history.push('/herd')
     }
 

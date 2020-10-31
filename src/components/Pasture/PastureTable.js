@@ -14,8 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router'
 import { FormLabel } from '@material-ui/core';
-import CalvingBookItem from './CalvingBookItem';
-
+import PastureTableItem from './PastureTableItem';
 
 const useStyles = makeStyles((theme) => ({
     input: {
@@ -34,32 +33,23 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         textAlign: 'center',
     },
-    root: { width: 500 },
+    root: { width: 'auto' },
     grid: { marginBottom: 25 },
 }));
 
 
 
-//this component will bring in the entire herd and display it 
-//in table form
-const YetToCalfTable = (props) => {
+
+const PastureTable = (props) => {
     const classes = useStyles();
-    const [rows, setRows] = useState(props.yetToCalf)
-    // useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
-    // useEffect(() => { setRows(props.herd.filter(cow => !cow.close_to_calving && !cow.calf && cow.gender != 'bull')) }, [props.herd])
-    useEffect(()=> setRows(props.yetToCalf),[props.yetToCalf]);
+    const [rows, setRows] = useState([])
+    // useEffect(() => { setRows(props.closeToCalving) }, [props.closeToCalving])
 
 
-    //takes you the the CalfForm
-    const addCalf = (cow) => {
-        console.log(cow)
-        props.history.push(`/add/calf/${cow.animal_id}`)
-    }
 
-    //takes you to the CowForm
-    const addAnimal = () => {
-        props.history.push('/add/cow');
-    }
+
+
+
 
 
     return (
@@ -69,19 +59,18 @@ const YetToCalfTable = (props) => {
             {console.log(props)} */}
 
 
-            <h1>{rows.length} Not Close</h1>
+            <h5>{rows.length} {props.heading}</h5>
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
                                 <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>
-                                <TableCell style={{ textAlign: 'center' }}>More Details</TableCell>
-                                <TableCell style={{ textAlign: 'center' }}>Close to Calving</TableCell>
+                                <TableCell style={{ textAlign: 'center' }}>Details</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows != undefined && rows.map(row => (<CalvingBookItem key={row.animal_id} row={row} />))}
+                            {rows != undefined && rows.map(row => (<PastureTableItem key={row.animal_id} row={row} />))}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -94,6 +83,6 @@ const YetToCalfTable = (props) => {
 
 }
 
-// const map = (state) => ({ herd: state.herd, yetToCalf: state.yetToCalf })
+const map = (state) => ({ herd: state.herd, pastureRecords: state.pastureRecords })
 
-export default connect()(withRouter(YetToCalfTable));
+export default connect(map)(withRouter(PastureTable));

@@ -122,7 +122,6 @@ const CalfForm = (props) => {
             calf: true,
             birthweight: '',
         });
-        swal('Successfully Added Calf', { timer: 1500, buttons: false, icon: 'success' });
 
         setCalfNote('');
         if(cowNote != ''){

@@ -54,7 +54,6 @@ const useStyles = makeStyles({
 const Footer = (props) => {
     const classes= useStyles();
     const [location, setLocation] = useState(null);
-    const [weather, setWeather] = useState(null);
 
 
     useEffect(() => {navigator.geolocation.getCurrentPosition(function (position) { setLocation(position.coords) })}, [])
@@ -66,6 +65,7 @@ return(
 
 
 <footer className={classes.root}>
+    {console.log(location)}
     <hr/>
     <Grid container className={classes.root} justify='space-between' >
         <Grid item xs={2}>

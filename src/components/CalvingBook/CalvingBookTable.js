@@ -45,21 +45,11 @@ const useStyles = makeStyles((theme) => ({
 const CloseToCalvingTable = (props) => {
     const classes = useStyles();
     const [rows, setRows]=useState(props.closeToCalving)
-    // useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
     useEffect(()=> {setRows(props.closeToCalving)},[props.closeToCalving])
 
-    //set up state for the filter function of the component
-    const [filterHerd, setFilterHerd] = useState(false);
 
-    //set up a function that will filter the herd based on the filter set up
-    //we will not show calves in this component and we will not show archived animals in 
-    //this component
-    // const rows = () => {
-    //     if (filterHerd) {
-    //         return props.herd.filter(cow => cow.gender === filterHerd && !cow.calf && !cow.archived)
-    //     } else if (props.herd[0]) { return props.herd.filter(cow => !cow.calf && !cow.archived) }
-    //     else { return props.herd }
-    // }
+
+
 
     //takes you the the CalfForm
     const addCalf = (cow) => {

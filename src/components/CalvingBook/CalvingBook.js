@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
 //in table form
 const CalvingBook = (props) => {
     const classes = useStyles();
-    useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, [])
-    useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
+    useEffect(() => { props.dispatch({ type: 'GET_HERD' }) },[])
+    useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) },[]);
 
 
 
