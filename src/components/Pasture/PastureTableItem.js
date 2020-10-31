@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import moment from 'moment';
 
 
 
@@ -25,7 +26,13 @@ const PastureTableItem = (props) => {
         props.history.push(`/details/${row.animal_id}`)
     }
 
-
+    const remove = () => {
+        props.dispatch({ 
+            type:'REMOVE_FROM_PASTURE', 
+            payload:{
+                pasture_record_id: row.pasture_record_id,
+                date_out: moment().format('yyyy-MM-DD')}});
+    }
 
 
 
@@ -44,6 +51,16 @@ const PastureTableItem = (props) => {
                     variant="contained"
                     color="default">
                     Details
+                </Button>
+            </TableCell>
+            <TableCell style={{ textAlign: 'center' }}>
+                <Button
+                    onClick={remove}
+                    style={{ fontSize: 10 }}
+                    size="small"
+                    variant="contained"
+                    color="default">
+                    Remove
                 </Button>
             </TableCell>
 

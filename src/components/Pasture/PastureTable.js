@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
 
 const PastureTable = (props) => {
     const classes = useStyles();
-    const [rows, setRows] = useState([])
-    // useEffect(() => { setRows(props.closeToCalving) }, [props.closeToCalving])
+    const [rows, setRows] = useState(props.animals)
+    useEffect(() => { setRows(props.animals) }, [props.animals])
 
 
 
@@ -55,11 +55,9 @@ const PastureTable = (props) => {
     return (
 
         <>
-            {/* {console.log(rows())}
-            {console.log(props)} */}
 
 
-            <h5>{rows.length} {props.heading}</h5>
+           {props.heading && <><h5>{rows.length} {props.heading}</h5>
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
@@ -67,6 +65,7 @@ const PastureTable = (props) => {
                             <TableRow>
                                 <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>
                                 <TableCell style={{ textAlign: 'center' }}>Details</TableCell>
+                                <TableCell style={{ textAlign: 'center' }}>Remove From Pasture</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -74,7 +73,7 @@ const PastureTable = (props) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </Paper>
+            </Paper></>}
 
 
         </>

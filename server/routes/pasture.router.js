@@ -15,8 +15,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/records', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * FROM "pasture_records" WHERE "user_id"=$1 AND "date_out" is null;`;
-    pool.query(queryText, [req.user.id]).then(result => res.send(result.rows)).then(e => {
+    let queryText = `SELECT * FROM "pasture_records" 
+JOIN "animals" ON "animals"."animal_id" = "pasture_records"."animal_id"
+JOIN "pastures" ON "pastures"."pasture_id" = "pasture_records"."pasture_id"
+WHERE "pasture_records"."user_id"=$1 AND "date_out" is null;`;
+    pool.query(queryText, [req.user.id]).then(result => res.send(result.rows)).catch(e => {
         console.log('error getting pasture records', e);
         res.sendStatus(500);
     });

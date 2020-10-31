@@ -29,6 +29,20 @@ function* getPastureRecords(action) {
 
 };
 
+function* addToPasture(action)  {
+    try{
+        yield Axios.post('/api/pasture/records', action.payload);
+        yield put({type:'GET_PASTURE_RECORDS'});
+    } catch (e) { console.log('error adding to pasture', e); swal('Error Adding To Pasture', { timer: 1500, buttons: false, icon: 'error' }) }
+};
+
+function* removeFromPasture(action) {
+    try{
+        yield Axios.put('/api/pasture/records', action.payload);
+        yield put({type:'GET_PASTURE_RECORDS'});
+    }catch(e){console.log('error removing from pasture', e)}
+}
+
 
 
 
@@ -38,6 +52,8 @@ function* pastureSaga () {
     yield takeEvery('GET_PASTURES', getPastures);
     yield takeEvery('ADD_PASTURE', addPasture);
     yield takeEvery('GET_PASTURE_RECORDS', getPastureRecords);
+    yield takeEvery('ADD_TO_PASTURE', addToPasture);
+    yield takeEvery('REMOVE_FROM_PASTURE', removeFromPasture);
 } 
 
 export default pastureSaga;
