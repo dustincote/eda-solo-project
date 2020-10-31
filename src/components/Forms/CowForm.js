@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 //we will dispatch to get movies and genres on loading of the component
 const CowForm = (props) => {
     useEffect(()=>{window.scrollTo({top:0,behavior:'smooth'})},[]);
+    useEffect(() => {props.dispatch({type:'GET_HERD'})},[]);
     const classes = useStyles();
     const [newCow, setCow] = useState({
         tag_number: '',
@@ -38,7 +39,10 @@ const CowForm = (props) => {
         close_to_calving: false,
         calf: false,
     })
+    useEffect(() => { if(newCow.tag_number != ''){setTagNumbers(props.herd.filter(cow=> !cow.calf).map(cow => cow.tag_number))} }, [newCow.tag_number, props.herd]);
+
     const [note, setNote] = useState('')
+    const [tagNumbers, setTagNumbers] = useState([]);
     const handleChange = (event) => {
         setCow({
             ...newCow,
@@ -59,6 +63,8 @@ const CowForm = (props) => {
         console.log(note)
     }
     const submit = (e) => {
+ 
+        if(tagNumbers.indexOf(newCow.tag_number) === -1){
         props.dispatch({ type: 'ADD_COW', payload: { newCow: newCow, note: note } });
         e.preventDefault()
         console.log('submit form for new cow')
@@ -73,8 +79,10 @@ const CowForm = (props) => {
             calf: false,
         });
         setNote('');
-        props.history.push('/herd')
-    }
+            props.history.push('/herd')
+        } else { e.preventDefault(); swal(`Animal with Tag number ${newCow.tag_number} already exists
+        if trying to add a calf please do so in the calving book tab`, { timer:4000, buttons: false, icon: 'warning' })}
+    }//end submit
 
     const goBack = () => {
         props.history.goBack()

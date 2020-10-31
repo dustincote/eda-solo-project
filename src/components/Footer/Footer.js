@@ -56,7 +56,11 @@ const Footer = (props) => {
     const [location, setLocation] = useState(null);
 
 
-    useEffect(() => {navigator.geolocation.getCurrentPosition(function (position) { setLocation(position.coords) })}, [])
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(function (position) { setLocation(position.coords) },
+        function error(msg) { console.log('error getting geolocation:', msg) },
+            { maximumAge: 10000, timeout: 50000, enableHighAccuracy: true })}, []);
+
     useEffect(() => {location != null && props.dispatch({type:'GET_WEATHER', payload:{latitude: location.latitude, longitude: location.longitude}})}, [location])
 
 
@@ -65,7 +69,6 @@ return(
 
 
 <footer className={classes.root}>
-    {console.log(location)}
     <hr/>
     <Grid container className={classes.root} justify='space-between' >
         <Grid item xs={2}>

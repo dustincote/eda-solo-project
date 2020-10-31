@@ -77,7 +77,7 @@ const PastureView = (props) => {
   const addToPasture = (e) => {
     e.preventDefault();
     let inPasture = props.pastureRecords.map(cow => cow.animal_id);
-    console.log(inPasture);
+    // console.log(inPasture);
     if (animal[0] === undefined) {
       swal(`Animal with tag number ${tagNumber} and gender of ${gender} does not exist,`, { timer: 4000, buttons: false, icon: 'warning' });
     } else if (inPasture.indexOf(animal[0].animal_id) === -1) {
@@ -109,7 +109,6 @@ const PastureView = (props) => {
       <Grid container direction='column' spacing={4} alignItems='center' >
         <Grid item xs={12} style={{ textAlign: 'center' }}>
 
-          {console.log('animal is', animal)}
           <form onSubmit={addToPasture}>
             {props.pastures &&
               <>
