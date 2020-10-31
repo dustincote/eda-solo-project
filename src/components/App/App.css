@@ -120,3 +120,7 @@ input {
 #welcome {
   font-size: 25;
 }
+
+.swal-text{
+  text-align: center;
+}

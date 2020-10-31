@@ -81,7 +81,7 @@ const CowForm = (props) => {
         setNote('');
             props.history.push('/herd')
         } else { e.preventDefault(); swal(`Animal with Tag number ${newCow.tag_number} already exists
-        if trying to add a calf please do so in the calving book tab`, { timer:4000, buttons: false, icon: 'warning' })}
+        if trying to add a calf please do so in the calving book tab`, {  timer:4000, buttons: false, icon: 'warning' })}
     }//end submit
 
     const goBack = () => {
