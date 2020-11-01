@@ -4,6 +4,8 @@ const router = express.Router();
 const { rejectUnauthenticated,} = require('../modules/authentication-middleware');
 
 
+// get route /api/animal/ returns all of current users animals who are not archived
+// order by tag_numbers
 router.get('/', rejectUnauthenticated, (req, res) => {
   let queryText =`SELECT * FROM "animals" WHERE "user_id"=$1 AND "archived"='false' ORDER BY "tag_number";`
   pool.query(queryText,[req.user.id]).then(result => res.send(result.rows))
@@ -15,6 +17,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 //post to /api/animal/cow this is used to post a new cow to the database
+// uses returning to return the row that was just created
+//then send an object to the client with animal_id, and tag_number this is so 
+//the client can then post the note for the animal just created they need the row id
+//for the animal before they can send the post request for the note entry
 router.post('/cow', rejectUnauthenticated, (req, res) => {
   // console.log(req.body);
   console.log(req.user);
@@ -38,7 +44,7 @@ router.post('/cow', rejectUnauthenticated, (req, res) => {
     VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`
   pool.query(queryText, values).then(result => {
     res.send({ animal_id: result.rows[0].animal_id, tag_number: result.rows[0].tag_number });
-    console.log(result.rows[0].animal_id)
+    // console.log(result.rows[0].animal_id)
   }).catch(err => {
     console.log('error posting cow', err);
     res.sendStatus(500);
@@ -46,7 +52,9 @@ router.post('/cow', rejectUnauthenticated, (req, res) => {
 });//end post route to /api/animal/cow
 
 
-//post to /api/animal/calf this is used to post a new calf to the database
+//post to /api/animal/calf this is used to post a new calf to the database same as the post for the cow
+//above we send back to the client the animal_id of the row just created and the tag_number so the client
+//can post the note for the new calf created
 router.post('/calf', rejectUnauthenticated, (req, res) => {
   // console.log(req.body);
   console.log(req.user);
@@ -86,13 +94,15 @@ router.get('/note/:id', rejectUnauthenticated,(req, res) => {
   });
 });//end get route to /api/animal/note/:id
 
+
+// /api/animal/note gets last 10 notes from the database
 router.get('/note', rejectUnauthenticated, (req, res) => {
-  let queryText = `SELECT * FROM "notes" WHERE "user_id"=$1 LIMIT 10;`
+  let queryText = `SELECT * FROM "notes" WHERE "user_id"=$1 ORDER BY "date" DESC LIMIT 10;`
   pool.query(queryText, [req.user.id]).then(result => res.send(result.rows)).catch(e => {
     console.log('error getting all notes', e);
     res.sendStatus(500);
-  })
-})
+  });
+});//end get route 
 
 
 //post route to /api/animal/note this is used to add a note to an animal
@@ -126,7 +136,7 @@ router.put('/close', rejectUnauthenticated, (req, res)=> {
 });// end put route to /api/animal/close
 
 
-//put route to update archived
+//   /api/animal/archive
 router.put('/archive', rejectUnauthenticated, (req, res) => {
   let queryText = `UPDATE "animals" SET "archived"=$1, "date_archived"=$2 WHERE "animal_id"=$3 AND "user_id"=$4;`
   pool.query(queryText, [req.body.archived, req.body.date_archived, req.body.animal_id, req.user.id]).then(result => res.sendStatus(200))

@@ -5,15 +5,19 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-
+// api/pasture/  returns pastures for user
 router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "pastures" WHERE "user_id"=$1;`
     pool.query(queryText, [req.user.id]).then(result => res.send(result.rows)).catch(e => {
         console.log('error getting pastures', e);
         res.sendStatus(500);
     });
-});
+});// end get to api/pasture/
 
+
+// get to api/pasture/records  returns rows where date_out is null, this means the animal is still in the pasture
+//that the record pertains to, joined two tables so we have all info for the animal and the pasture available in one
+//array.
 router.get('/records', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "pasture_records" 
 JOIN "animals" ON "animals"."animal_id" = "pasture_records"."animal_id"
@@ -23,7 +27,7 @@ WHERE "pasture_records"."user_id"=$1 AND "date_out" is null;`;
         console.log('error getting pasture records', e);
         res.sendStatus(500);
     });
-});
+});// end get to api/pasture/records
 
 router.post('/', rejectUnauthenticated, (req, res) =>{
     let queryText= `INSERT INTO "pastures" ("pasture_name", "user_id") VALUES ($1, $2);`
