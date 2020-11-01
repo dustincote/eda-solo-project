@@ -24,13 +24,13 @@ const useStyles = makeStyles({
     maxHeight: 300,
     width: 'auto',
     minWidth: 300,
-    maxWidth: 350,
+    maxWidth: 300,
     textAlign: 'center',
   },
   notes:{
     marginTop: 40,
     minWidth: 300,
-    maxWidth: 350,
+    maxWidth: 300,
   },
   table:{
     minWidth: 300
