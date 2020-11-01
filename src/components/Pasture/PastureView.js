@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, withRouter } from 'react-router';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import PastureTable from './PastureTable';
 import TextField from '@material-ui/core/TextField';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -67,20 +64,25 @@ const PastureView = (props) => {
     }
   }, [tagNumber, gender]);
 
-
+//submit new pasture reset conditionally rendered input by setting setAddPasture to false
   const submitPasture = () => {
     props.dispatch({ type: 'ADD_PASTURE', payload: { pasture_name: newPasture } });
     setAddPasture(false);
     setPasture('');
   }
 
+  //set up an array of animal ids to check if the animal is currently in a pasture
+  // animal[0] will be undefined if user selected wrong gender for a tag number
+  // for instance if a user has a bull with tag number 2005 and selects cow and searches
+  //for 2005 it will filter based on != 'bull' for gender and the animal array will 
+  //not contain a record. 
   const addToPasture = (e) => {
     e.preventDefault();
     let inPasture = props.pastureRecords.map(cow => cow.animal_id);
     // console.log(inPasture);
     if (animal[0] === undefined) {
       swal(`Animal with tag number ${tagNumber} and gender of ${gender} does not exist,`, { timer: 4000, buttons: false, icon: 'warning' });
-    } else if (inPasture.indexOf(animal[0].animal_id) === -1) {
+    } else if (inPasture.indexOf(animal[0].animal_id) === -1) {//this means the animal is not currently in a pasture
       props.dispatch({
         type: 'ADD_TO_PASTURE',
         payload: {
@@ -90,10 +92,10 @@ const PastureView = (props) => {
           tag_number: animal[0].tag_number,
         }
       })
-    } else {
+    } else {// animal is in a pasture since animal is not undefined and there is an actual index for the animal_id
       let animalToFind = props.pastureRecords.filter(cow => cow.animal_id === animal[0].animal_id);
       swal(`Animal is already in a pasture please remove from ${animalToFind[0].pasture_name} pasture`, { timer: 4000, buttons: false, icon: 'warning' });
-    }
+    }//swal modal to alert user animal is in a pasture and give the name of the pasture to remove animal from
     setTagNumber('');
   }
 

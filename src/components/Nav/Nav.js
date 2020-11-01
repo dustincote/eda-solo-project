@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Grid from '@material-ui/core/Grid';
 
 const Nav = (props) => {
   let loginLinkData = {
@@ -17,29 +18,35 @@ const Nav = (props) => {
   }
 
   return (
-    <div className="nav">
+    <Grid container alignItems='center' className="nav">
+      <Grid item xs={2}>
       <NavLink to="/home">
         <img id='logo' src='herdsman.png'/>
       </NavLink>
-      <div className="nav-right">
+      </Grid>
+      <Grid item xs={10}>
+      <Grid container justify='flex-end' className="nav-right">
+       
         <NavLink className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
         </NavLink>
+
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>
-            <NavLink className="nav-link" to="/pasture/">
-              Pasture
+            <NavLink className="nav-link" to="/calvingbook">
+              CalvingBook
             </NavLink>
             <NavLink className="nav-link" to="/herd">
               Herd
             </NavLink>
-            <NavLink className="nav-link" to="/calvingbook">
-              CalvingBook
+            <NavLink className="nav-link" to="/pasture/">
+              Pasture
             </NavLink>
+
             <LogOutButton className="nav-link" />
           </>
         )}
@@ -47,8 +54,9 @@ const Nav = (props) => {
         <NavLink className="nav-link" to="/about">
           About
         </NavLink>
-      </div>
-    </div>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
