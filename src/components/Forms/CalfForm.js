@@ -4,7 +4,6 @@ import Grid from "@material-ui/core/Grid";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
@@ -17,25 +16,7 @@ import { useParams } from 'react-router';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-import swal from 'sweetalert';
 
-
-const useStyles = makeStyles((theme) => ({
-    input: {
-        marginTop: 25,
-        color: "white",
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-    root: {
-        flexGrow: 1,
-    },
-}));
 
 
 
@@ -48,7 +29,6 @@ const CalfForm = (props) => {
     //pull parameters off of url
     const { dam_id } = useParams();
 
-    const classes = useStyles();
     const [newCalf, setCalf] = useState({
         dam_id: dam_id,
         tag_number: '',

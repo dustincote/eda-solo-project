@@ -46,21 +46,19 @@ const useStyles = makeStyles({
         marginLeft: '33%',
     }
 });
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
 
+//footer houses the weather widget and the copyright statement
 const Footer = (props) => {
     const classes= useStyles();
     const [location, setLocation] = useState(null);
 
-
+    // when component mounts pull the location from the browser
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(function (position) { setLocation(position.coords) },
         function error(msg) { console.log('error getting geolocation:', msg) },
             { maximumAge: 10000, timeout: 50000, enableHighAccuracy: true })}, []);
 
+    // dispatch to get weather from the server side axios call, will run when weather is updated as long as location is not null
     useEffect(() => {location != null && props.dispatch({type:'GET_WEATHER', payload:{latitude: location.latitude, longitude: location.longitude}})}, [location])
 
 
