@@ -64,6 +64,9 @@ const CalfForm = (props) => {
     const [calfNote, setCalfNote] = useState('');
     const [dam, setDam] = useState(null);
     const [cowNote, setCowNote] = useState('');
+
+    useEffect(() => { setDam(props.herd.filter(cow => cow.animal_id === Number(dam_id))) }, [props.herd, dam_id]);
+    useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, []);
     //change handler for most inputs on form
     const handleChange = (event) => {
         setCalf({
@@ -125,13 +128,12 @@ const CalfForm = (props) => {
 
         setCalfNote('');
         if(cowNote != ''){
-            props.dispatch({type:'ADD_NOTE', payload:{note: cowNote, animal_id: dam_id}});
+            props.dispatch({type:'ADD_NOTE', payload:{note: cowNote, animal_id: dam_id, tag_number: dam[0].tag_number}});
         }
         props.dispatch({type: 'UPDATE_CLOSE_TO_CALVING', payload:{close_to_calving: false, animal_id: dam_id}})
         props.history.push('/home')
     }
-    useEffect(() => { setDam(props.herd.filter(cow => cow.animal_id === Number(dam_id)))},[props.herd])
-    useEffect(() => { props.dispatch({type:'GET_HERD'})}, [])
+   
 
     const goBack = () => {
         props.history.goBack()

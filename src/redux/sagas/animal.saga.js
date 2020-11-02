@@ -9,6 +9,7 @@ function* addNote(action) {
     try {
         yield Axios.post('/api/animal/note', action.payload);
         yield put({type:'GET_NOTES', payload: action.payload.animal_id});
+        yield put({type:'GET_ALL_NOTES'});
 
     } catch (e) { console.log('error posting note', e) };
 };//end add Note
