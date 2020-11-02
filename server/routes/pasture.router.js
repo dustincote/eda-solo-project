@@ -29,6 +29,8 @@ WHERE "pasture_records"."user_id"=$1 AND "date_out" is null;`;
     });
 });// end get to api/pasture/records
 
+
+
 router.post('/', rejectUnauthenticated, (req, res) =>{
     let queryText= `INSERT INTO "pastures" ("pasture_name", "user_id") VALUES ($1, $2);`
     pool.query(queryText, [ req.body.pasture_name , req.user.id]).then(result => res.sendStatus(201)).catch(e => {

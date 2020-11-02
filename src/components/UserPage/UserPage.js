@@ -76,7 +76,7 @@ const UserPage = (props) => {
                 </Typography>
 
                   <Typography>
-                {props.yetToCalf.length} Yet To Calf<br/>
+                {props.yetToCalf.length} Not Close To Calving<br/>
                   </Typography>
 
                     <Typography>
