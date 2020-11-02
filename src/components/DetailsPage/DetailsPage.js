@@ -45,22 +45,36 @@ function DetailsPage(props) {
     const classes = useStyles();
     const [addNewNote, setAddNewNote]= useState(false);
     const [note, setNote] = useState('');
-
+    //scroll back to the top of the page when page first renders
     useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
+
+    // set animal to the animal we are looking for on the url will run when props.herd changes or when animal_id changes
     useEffect(() => { setAnimal(props.herd.filter(a => a.animal_id === Number(animal_id)))},[props.herd, animal_id]);
+
+    // if animal[0] is valid we will set dam to the mother we are looking for this will run when animal changes
     useEffect(() => { animal[0] && setDam(props.herd.filter(a => a.animal_id === Number(animal[0].dam_id)))},[animal]);
-    useEffect(() => { setCurrentCalves(props.herd.filter(a => a.calf && !a.archived))},[props.herd, animal_id]);
+
+    //filters the herd down so current calves only includes the current calves
+    //will run when props.herd changes and also when animal_id changes
+    useEffect(() => { setCurrentCalves(props.herd.filter(a => a.calf))},[props.herd, animal_id]);
+
+    //find the current animals calves, will run when current calves changes
     useEffect(() => { setAnimalsCalves(currentCalves.filter(a => a.dam_id === animal_id))},[currentCalves]);
+
+    // set up dispatches to get herd and notes, notes will run when animal_id changes
     useEffect(() => {props.dispatch({type: 'GET_HERD'})}, []);
     useEffect(() => {props.dispatch({ type: 'GET_NOTES', payload: animal_id })}, [animal_id]);
 
+
     const details = (id) => {
         props.history.push(`/details/${id}`)
-    }
+    }//end details
+
     const backToHerd = () => {
         props.history.goBack();
-    }
+    }//end backToHerd
 
+    // archives the animal using current date as the date archived
     const handleCheck = () => {
         props.dispatch({ 
             type: 'UPDATE_ARCHIVED', payload: { 
@@ -68,21 +82,24 @@ function DetailsPage(props) {
                 archived: !animal[0].archived,
                 date_archived: moment().format('yyyy-MM-DD') 
             } });
-    }
+    }//end handleCheck
+
 
     const deleteNote = (id) => {
         props.dispatch({type:'DELETE_NOTE', payload: {id:id, animal_id: animal_id}});
-    }
+    }//end deleteNote
 
     const submitNote = () => {
         console.log({note: note, animal_id: animal_id})
         props.dispatch({ type: 'ADD_NOTE', payload: { note: note, animal_id: animal_id, tag_number: animal[0].tag_number}});
         setAddNewNote(false);
         setNote('');
-    }
+    }//end submitNote
+
+
     const cancelNote = () => {
         setAddNewNote(false);
-    }
+    }//end cancelNote
 
 
     return (

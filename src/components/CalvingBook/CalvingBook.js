@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router'
-import { FormLabel } from '@material-ui/core';
-import CalvingBookItem from './CalvingBookItem';
 import CalvingBookTable from './CalvingBookTable';
 
 
@@ -32,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-//this component will bring in the entire herd and display it 
-//in table form
+//this component will display 3 tables, close to calving, not close, and already calved
+//we bring in the data for these tables through props and the redux store
 const CalvingBook = (props) => {
     const classes = useStyles();
     useEffect(() => { props.dispatch({ type: 'GET_HERD' }) },[])
@@ -70,10 +68,10 @@ const CalvingBook = (props) => {
 
 }
 
-const map = (state) => ({ 
+const mapState = (state) => ({ 
     herd: state.herd,
     yetToCalf: state.yetToCalf,
     alreadyCalved: state.alreadyCalved, 
     closeToCalving: state.closeToCalving });
 
-export default connect(map)(withRouter(CalvingBook));
+export default connect(mapState)(withRouter(CalvingBook));

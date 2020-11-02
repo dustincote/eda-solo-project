@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,11 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router'
-import { FormLabel } from '@material-ui/core';
 import CalvingBookItem from './CalvingBookItem';
 
 
@@ -40,27 +35,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-//this component will bring in the entire herd and display it 
-//in table form
+// This is the table component for the close to calving page
 const CloseToCalvingTable = (props) => {
     const classes = useStyles();
     const [rows, setRows]=useState(props.closeToCalving)
     useEffect(()=> {setRows(props.closeToCalving)},[props.closeToCalving])
 
 
-
-
-
-    //takes you the the CalfForm
-    const addCalf = (cow) => {
-        console.log(cow)
-        props.history.push(`/add/calf/${cow.animal_id}`)
-    }
-
-    //takes you to the CowForm
-    const addAnimal = () => {
-        props.history.push('/add/cow');
-    }
 
 
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -12,8 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
-//this is the component that will display all of the movies
-//we will dispatch to get movies and genres on loading of the component
+// this is each individual item in the table 
 const CalvingBookItem = (props) => {
     const row = props.row
 
@@ -22,10 +21,6 @@ const CalvingBookItem = (props) => {
     const addCalf = () => {
         console.log(row)
         props.history.push(`/add/calf/${row.animal_id}`)
-    }
-
-    const details = () => {
-        props.history.push(`/details/${row.animal_id}`)
     }
 
     const handleCheck = (event) => {

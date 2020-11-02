@@ -5,7 +5,9 @@ const axios = require('axios');
 
 
 
-
+// get to api/weather this will make a get request to open weather to get 
+// the current weather conditions based off the latitude and longitude that the
+// client sends over on req.params then we send the response back to the client
 router.get('/:latitude/:longitude', (req, res) => {
     // console.log(process.env.OPEN_WEATHER_KEY)
     // console.log(req.params);
