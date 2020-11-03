@@ -16,7 +16,7 @@ function* addNote(action) {
 
 //this saga is used to add a cow to the database.  it waits for a response
 //and then adds a note for the animal when axios returns the animal_id
-//from the server
+//from the server only if the note contains something other than an empty string
 function* addCow(action) {
     try {
         const response = yield Axios.post('/api/animal/cow', action.payload.newCow);

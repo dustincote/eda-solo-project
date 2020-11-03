@@ -30,23 +30,32 @@ const useStyles = makeStyles(() => ({
 const PastureView = (props) => {
   //used for styling tables
   const classes = useStyles();
+
   //set up animal user is trying to add to pasture
   const [animal, setAnimal] = useState([]);
+
   //used to hold the tagNumber the user types in
   const [tagNumber, setTagNumber] = useState('');
+
   //used to check if we are trying to add a cow/heifer, calf, or bull to pasture
   const [gender, setGender] = useState('cow');
+
   //set pasture user wants to add to
   const [pasture, setPasture] = useState('')
+
   //used to conditionally render input for new pasture
   const [addPasture, setAddPasture] = useState(false);
+
   //hold value of new pasture user wants to add
   const [newPasture, setNewPasture] = useState('');
+  
   //sets up holding place for all animals in current pasture
   const [animalsInPasture, setAnimalsInPasture] = useState([]);
+
   useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, []);
   useEffect(() => { props.dispatch({ type: 'GET_PASTURES' }) }, []);
   useEffect(() => { props.dispatch({ type: 'GET_PASTURE_RECORDS' }) }, []);
+  
   //this is where we run the logic for the conditional rendering of input for new pasture
   useEffect(() => { if (pasture === 0) { setAddPasture(true) } else { setAddPasture(false) } }, [pasture]);
   //filters pastureRecords so that animalsInPasture only hold animals in the current pasture
