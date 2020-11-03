@@ -45,16 +45,20 @@ const CalfForm = (props) => {
     const [dam, setDam] = useState(null);
     const [cowNote, setCowNote] = useState('');
 
+    // find the mother and pull her info out of the herd will update when props.herd changes
+    // and when dam_id changes
     useEffect(() => { setDam(props.herd.filter(cow => cow.animal_id === Number(dam_id))) }, [props.herd, dam_id]);
     useEffect(() => { props.dispatch({ type: 'GET_HERD' }) }, []);
+   
+   
     //change handler for most inputs on form
     const handleChange = (event) => {
         setCalf({
             ...newCalf,
             [event.target.name]: event.target.value,
         });
-        console.log(newCalf);
-    }
+        // console.log(newCalf);
+    };//end handleChange
 
 
     //handle checkbox for castrated, when a bull is castrated
@@ -72,9 +76,8 @@ const CalfForm = (props) => {
                gender: 'bull'
            });
         }
-
-        console.log(newCalf)
-    }
+        // console.log(newCalf)
+    };//end handleCheck
 
 
 
@@ -82,11 +85,12 @@ const CalfForm = (props) => {
     const noteChange = (event) => {
         setCalfNote(event.target.value)
         console.log(calfNote)
-    }
+    };//end noteChange
+
 
     const cowNoteChange = (event) => {
         setCowNote(event.target.value)
-    }
+    };// end cowNoteChange
 
     //submit calf form to saga, prevent page reloading
     //reset the form, reset the note, push user to home page
@@ -112,12 +116,12 @@ const CalfForm = (props) => {
         }
         props.dispatch({type: 'UPDATE_CLOSE_TO_CALVING', payload:{close_to_calving: false, animal_id: dam_id}})
         props.history.push('/home')
-    }
+    };
    
 
     const goBack = () => {
         props.history.goBack()
-    }
+    };
 
 
 

@@ -4,7 +4,6 @@ import Grid from "@material-ui/core/Grid";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
@@ -18,9 +17,7 @@ import swal from 'sweetalert';
 
 
 
-const useStyles = makeStyles((theme) => ({
 
-}));
 
 
 
@@ -29,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 const CowForm = (props) => {
     useEffect(()=>{window.scrollTo({top:0,behavior:'smooth'})},[]);
     useEffect(() => {props.dispatch({type:'GET_HERD'})},[]);
-    const classes = useStyles();
     const [newCow, setCow] = useState({
         tag_number: '',
         gender: 'cow',
@@ -38,10 +34,10 @@ const CowForm = (props) => {
         disposition: '',
         close_to_calving: false,
         calf: false,
-    })
+    });
     useEffect(() => { if(newCow.tag_number != ''){setTagNumbers(props.herd.filter(cow=> !cow.calf).map(cow => cow.tag_number))} }, [newCow.tag_number, props.herd]);
 
-    const [note, setNote] = useState('')
+    const [note, setNote] = useState('');
     const [tagNumbers, setTagNumbers] = useState([]);
     const handleChange = (event) => {
         setCow({
@@ -49,19 +45,21 @@ const CowForm = (props) => {
             [event.target.name]: event.target.value,
         });
         console.log(newCow);
-    }
+    };
+
     const handleCheck = (event) => {
         setCow({
             ...newCow,
             [event.target.name]: event.target.checked
         });
         console.log(newCow)
-    }
+    };
 
     const noteChange = (event) => {
         setNote(event.target.value)
         console.log(note)
-    }
+    };
+
     const submit = (e) => {
  
         if(tagNumbers.indexOf(newCow.tag_number) === -1){
@@ -82,11 +80,12 @@ const CowForm = (props) => {
             props.history.push('/herd')
         } else { e.preventDefault(); swal(`Animal with Tag number ${newCow.tag_number} already exists
         if trying to add a calf please do so in the calving book tab`, {  timer:4000, buttons: false, icon: 'warning' })}
-    }//end submit
+    };//end submit
+
 
     const goBack = () => {
         props.history.goBack()
-    }
+    };
 
     return (
     <>
