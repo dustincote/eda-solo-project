@@ -61,11 +61,7 @@ const HerdView = (props) => {
         else{return props.herd}
     }
 
-    //takes you the the CalfForm
-    const addCalf = (cow) => {
-        console.log(cow)
-        props.history.push(`/add/calf/${cow.animal_id}`)
-    }
+
 
     //takes you to the CowForm
     const addAnimal = () => {
@@ -100,21 +96,21 @@ const HerdView = (props) => {
                 <Paper className={classes.root}>
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
-                                <TableRow>
+                            <TableHead >
+                                <TableRow >
                                     <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>
                                     <TableCell style={{ textAlign: 'center' }}>More Details</TableCell>
                                     <TableCell style={{textAlign:'center'}}>Close to Calving</TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
-                                {rows() != undefined && rows().map(row => (<HerdViewItem key={row.animal_id} row={row} />))}
+                            <TableBody  >
+                                {rows() != undefined && rows().map((row, index) => (<HerdViewItem key={row.animal_id} row={row} index={index} />))}
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </Paper>
-                <Button style={{backgroundColor: 'maroon', marginTop: 20, color:'white'}} 
-                        variant="outlined"
+                <Button style={{ marginTop: 20,}} 
+                        variant="contained"
                         onClick={addAnimal}
                         >Add New Animal To Herd</Button>
             </Grid><br /><br />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -12,26 +12,21 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
-//this is the component that will display all of the movies
-//we will dispatch to get movies and genres on loading of the component
+// This component is each individual row of the herd view component
 const HerdViewItem = (props) => {
     const row = props.row
 
  
-
-    const addCalf = (row) => {
-        console.log(row)
-        props.history.push(`/add/calf/${row.animal_id}`)
-    }
-
+    // Takes user to details page for the animal selected
     const details = () => {
         props.history.push(`/details/${row.animal_id}`)
-    }
+    }// end details
 
+    // updates cow to close to calving
     const handleCheck = (event) => {
         props.dispatch({ type: 'UPDATE_CLOSE_TO_CALVING', payload: {animal_id: row.animal_id, close_to_calving: !row.close_to_calving} });
 
-    }
+    }// end handleCheck
 
 
 
@@ -40,7 +35,7 @@ const HerdViewItem = (props) => {
     return (
 
 
-        <TableRow key={row.animal_id}>
+        <TableRow  key={row.animal_id}>
             <TableCell style={{ textAlign: 'center' }}>{row.tag_number}</TableCell>
             <TableCell style={{ textAlign: 'center' }}>
                 <Button  
@@ -72,6 +67,5 @@ const HerdViewItem = (props) => {
 
 }
 
-const map = (state) => ({ herd: state.herd, })
 
-export default connect(map)(withRouter(HerdViewItem));
+export default connect()(withRouter(HerdViewItem));

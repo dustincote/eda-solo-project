@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,11 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router'
-import { FormLabel } from '@material-ui/core';
 import PastureTableItem from './PastureTableItem';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,13 +40,6 @@ const PastureTable = (props) => {
     const [rows, setRows] = useState(props.animals)
     useEffect(() => { setRows(props.animals) }, [props.animals])
 
-
-
-
-
-
-
-
     return (
 
         <>
@@ -82,6 +70,5 @@ const PastureTable = (props) => {
 
 }
 
-const map = (state) => ({ herd: state.herd, pastureRecords: state.pastureRecords })
 
-export default connect(map)(withRouter(PastureTable));
+export default connect()(withRouter(PastureTable));

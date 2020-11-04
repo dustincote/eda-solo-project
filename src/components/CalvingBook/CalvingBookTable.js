@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withRouter } from 'react-router'
 import CalvingBookItem from './CalvingBookItem';
+import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,8 +30,9 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         textAlign: 'center',
     },
-    root: { width: 500 },
+    root: { width: 500, textAlign:'center' },
     grid: { marginBottom: 25 },
+    heading:{marginTop: 75, fontSize:18, marginBottom:10}
 }));
 
 
@@ -49,14 +51,12 @@ const CloseToCalvingTable = (props) => {
         <>
             {/* {console.log(rows())}
             {console.log(props)} */}
-
-
-        <h5>{rows.length} {props.heading}</h5>
-                <Paper className={classes.root}>
+            <Typography className={classes.heading}>{rows.length} {props.heading}</Typography> 
+            <Paper className={classes.root}>
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
-                                <TableRow>
+                                <TableRow >
                                     <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>
                                     <TableCell style={{ textAlign: 'center' }}>Add Calf</TableCell>
                                     <TableCell style={{ textAlign: 'center' }}>Close to Calving</TableCell>

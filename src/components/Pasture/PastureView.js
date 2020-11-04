@@ -3,7 +3,6 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -41,7 +40,7 @@ const PastureView = (props) => {
   const [gender, setGender] = useState('cow');
 
   //set pasture user wants to add to
-  const [pasture, setPasture] = useState('')
+  const [pasture, setPasture] = useState('');
 
   //used to conditionally render input for new pasture
   const [addPasture, setAddPasture] = useState(false);
@@ -123,7 +122,7 @@ const PastureView = (props) => {
           <form onSubmit={addToPasture}>
             {props.pastures &&
               <>
-                <InputLabel >Select Pasture</InputLabel>
+                <InputLabel style={{marginTop:15}}>Select Pasture</InputLabel>
                 <Select required className={classes.input} name="pasture" placeholder="Pasture" value={pasture} onChange={(e) => setPasture(e.target.value)} >
                   <MenuItem value={0}>Add a Pasture</MenuItem>
                   {props.pastures.map(pasture => <MenuItem key={pasture.pasture_id} value={pasture}>{pasture.pasture_name}</MenuItem>)}
@@ -132,14 +131,16 @@ const PastureView = (props) => {
 
             {addPasture ?
               <>
-                <Input
+                <TextField
+                  style={{marginTop: 15}}
+                  label="Pasture Name"
                   value={newPasture}
                   onChange={(e) => setNewPasture(e.target.value)} />
                 <br />
-                <Button onClick={submitPasture}>Submit</Button> </> : <></>}
+                <Button style={{marginTop:10}} variant='contained' onClick={submitPasture}>Add Pasture</Button> </> : <></>}
             <br />
 
-            <TextField
+            {addPasture != true && <><TextField
               onChange={(e) => setTagNumber(e.target.value)}
               name="tag_number"
               value={tagNumber}
@@ -162,7 +163,7 @@ const PastureView = (props) => {
                 control={<Radio color="primary" />}
                 label="Bull" />
             </RadioGroup><br />
-            <Button type='submit'>Add To {pasture.pasture_name} Pasture</Button>
+            <Button variant='contained' type='submit'>Add To {pasture.pasture_name} Pasture</Button></>}
           </form>
         </Grid>
         <Grid style={{ textAlign: 'center' }} item xs={12}>
