@@ -12,7 +12,6 @@ import { FormControl, FormControlLabel } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import moment from 'moment';
 import swal from 'sweetalert';
 
 
@@ -21,24 +20,29 @@ import swal from 'sweetalert';
 
 
 
-//this is the component that will display all of the movies
-//we will dispatch to get movies and genres on loading of the component
+// this component is the form to add a new cow
 const CowForm = (props) => {
     useEffect(()=>{window.scrollTo({top:0,behavior:'smooth'})},[]);
     useEffect(() => {props.dispatch({type:'GET_HERD'})},[]);
     const [newCow, setCow] = useState({
         tag_number: '',
         gender: 'cow',
-        birth_date: moment().subtract(5,'year').format('yyyy-MM-DD'),
+        birth_date: '',
         sire_id: '',
         disposition: '',
         close_to_calving: false,
         calf: false,
     });
+
+    //generate array of all current adult animal tag numbers so we can check to see 
+    //if there is an animal with that tag number that already exists
     useEffect(() => { if(newCow.tag_number != ''){setTagNumbers(props.herd.filter(cow=> !cow.calf).map(cow => cow.tag_number))} }, [newCow.tag_number, props.herd]);
 
+    //local state
     const [note, setNote] = useState('');
     const [tagNumbers, setTagNumbers] = useState([]);
+
+    //change handler for new cow
     const handleChange = (event) => {
         setCow({
             ...newCow,
@@ -47,6 +51,7 @@ const CowForm = (props) => {
         console.log(newCow);
     };
 
+    //change handler for checkbox
     const handleCheck = (event) => {
         setCow({
             ...newCow,
@@ -55,13 +60,15 @@ const CowForm = (props) => {
         console.log(newCow)
     };
 
+    //handle change for note
     const noteChange = (event) => {
         setNote(event.target.value)
         console.log(note)
     };
 
     const submit = (e) => {
- 
+        //check to make sure the tag number entered does not already exist in the 
+        //adult herd
         if(tagNumbers.indexOf(newCow.tag_number) === -1){
         props.dispatch({ type: 'ADD_COW', payload: { newCow: newCow, note: note } });
         e.preventDefault()
@@ -69,7 +76,7 @@ const CowForm = (props) => {
         setCow({
             tag_number: '',
             gender: 'cow',
-            birth_date: moment().subtract(5, 'year').format('yyyy-MM-DD'),
+            birth_date: '',
             sire_id: '',
             disposition: '',
             close_to_calving: false,

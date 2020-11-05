@@ -84,21 +84,20 @@ function DetailsPage(props) {
             icon: "warning",
             buttons: true,
             dangerMode: true,
-        })
-            .then(d => {
-                if (d) {
-                    props.dispatch({
-                        type: 'UPDATE_ARCHIVED', 
-                        payload: {
-                            animal_id: animal_id,
-                            archived: !animal[0].archived,
-                            date_archived: moment().format('yyyy-MM-DD')
-                            }
-                    });
-                    props.history.goBack();
-                }
+        }).then(response => {
+            if (response) {
+                props.dispatch({
+                    type: 'UPDATE_ARCHIVED',
+                    payload: {
+                        animal_id: animal_id,
+                        archived: !animal[0].archived,
+                        date_archived: moment().format('yyyy-MM-DD')
+                    }
+                });
+                props.history.goBack();
             }
-            )
+        }
+        )
 
     }//end handleCheck
 
@@ -176,6 +175,7 @@ function DetailsPage(props) {
             <div style={{ textAlign: 'center', marginTop: 20 }}>
 
                 {addNewNote ? <><TextField
+                style={{marginBottom: 15}}
                     onChange={(event) => setNote(event.target.value)}
                     id="outlined-multiline-static"
                     label="Notes"

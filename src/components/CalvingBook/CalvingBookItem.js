@@ -43,7 +43,7 @@ const CalvingBookItem = (props) => {
                     style={{ fontSize: 10 }}
                     size="small"
                     variant="contained"
-                    color="default">
+                    color="primary">
                     Add Calf
                 </Button>
             </TableCell>

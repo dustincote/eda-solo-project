@@ -1,3 +1,5 @@
+
+//filters herd to new array that only contains cows who are close to calving
 const closeToCalving = (state=[], action) => {
     
     if(action.type === 'SET_CLOSE_TO_CALVING'){

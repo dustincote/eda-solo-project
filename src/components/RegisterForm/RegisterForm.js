@@ -28,7 +28,7 @@ class RegisterForm extends Component {
     this.setState({
       [propertyName]: event.target.value,
     });
-  };
+  };// end handleInputChangeFor
 
   render() {
     return (

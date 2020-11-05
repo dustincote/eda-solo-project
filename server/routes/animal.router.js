@@ -23,7 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 //for the animal before they can send the post request for the note entry
 router.post('/cow', rejectUnauthenticated, (req, res) => {
   // console.log(req.body);
-  console.log(req.user);
+  // console.log(req.user);
   console.log('adding a cow with tag number', req.body.tag_number);
   let body = req.body;
   let values = [body.dam_id,
@@ -31,7 +31,7 @@ router.post('/cow', rejectUnauthenticated, (req, res) => {
   body.tag_number,
   body.gender,
   req.user.id,
-  body.birth_date,
+  (body.birth_date === '' ? null : body.birth_date),
   (body.disposition === '' ? null : body.disposition),
   body.calving_ease,
   body.castrated,

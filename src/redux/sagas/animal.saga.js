@@ -30,6 +30,9 @@ function* addCow(action) {
 };
 };
 
+//this saga is used to add a calf to the database.  it waits for a response
+//and then adds a note for the animal when axios returns the animal_id
+//from the server only if the note contains something other than an empty string
 function* addCalf(action) {
     try {
         const response = yield Axios.post('/api/animal/calf', action.payload.newCalf);
@@ -44,6 +47,7 @@ function* addCalf(action) {
  };
 };
 
+// get request to retrieve entire herd
 function* fetchHerd(action) {
     try {
         const response = yield Axios.get('/api/animal');
@@ -55,6 +59,7 @@ function* fetchHerd(action) {
     } catch (err) { console.log('error getting herd', err) };
 };
 
+// updates cows close to calving status
 function* closeToCalving(action){
     try{
         yield Axios.put('/api/animal/close', action.payload);
@@ -62,6 +67,8 @@ function* closeToCalving(action){
     }catch(e){console.log('error updating close to calving', e)};
 };
 
+
+// updates cows archived status, once archived it will no longer show up in the herd but it remains in the database
 function* updateArchived(action){
     try{
         yield Axios.put('/api/animal/archive', action.payload);
@@ -69,6 +76,7 @@ function* updateArchived(action){
     }catch(e){console.log('error archiving animal', e)};
 };
 
+// get request to receive all notes for specific animal
 function* getNotes(action){
     try{
         const response = yield Axios.get(`/api/animal/note/${action.payload}`);
@@ -76,6 +84,8 @@ function* getNotes(action){
     }catch(e){console.log('error getting notes', e)};
 };
 
+
+// get request to get 10 most recent notes
 function* getAllNotes(action) {
     try {
         const response = yield Axios.get(`/api/animal/note/`);
@@ -83,6 +93,7 @@ function* getAllNotes(action) {
     } catch (e) { console.log('error getting notes', e) };
 };
 
+// delete note 
 function* deleteNote(action){
     try{
         yield Axios.delete(`/api/animal/note/${action.payload.id}`)

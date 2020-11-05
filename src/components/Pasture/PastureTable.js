@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withRouter } from 'react-router'
 import PastureTableItem from './PastureTableItem';
+import  Typography  from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     input: {
@@ -24,11 +25,13 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
     },
     container: {
+        margin: 5,
         maxHeight: 440,
         width: 'auto',
         textAlign: 'center',
     },
-    root: { width: 'auto' },
+    table:{marginTop: 5},
+    root: { width: 500 },
     grid: { marginBottom: 25 },
 }));
 
@@ -45,10 +48,10 @@ const PastureTable = (props) => {
         <>
 
 
-           {props.heading && <><h5>{rows.length} {props.heading}</h5>
+           {props.heading && <><Typography>{rows.length} {props.heading}</Typography>
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
-                    <Table stickyHeader aria-label="sticky table">
+                    <Table className={classes.table}  stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
                                 <TableCell style={{ textAlign: 'center' }}>Tag Number</TableCell>

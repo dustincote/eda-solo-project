@@ -5,6 +5,7 @@ html, body, #react-root {
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+ background-color: #eeeeee;
 }
 
 img {
@@ -117,10 +118,11 @@ input {
 #welcome-img {
   width: 100px;
 }
+
 #welcome {
   font-size: 25;
 }
 
-.swal-text{
+.swal-text {
   text-align: center;
 }

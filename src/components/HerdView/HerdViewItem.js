@@ -43,7 +43,7 @@ const HerdViewItem = (props) => {
                     style={{ fontSize: 10 }} 
                     size="small" 
                     variant="contained" 
-                    color="default">
+                    color="primary">
                 More Details
                 </Button>
             </TableCell>

@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     fontSize: 24,
   }, 
   container: {
+    margin: 5,
     maxHeight: 300,
     width: 'auto',
     minWidth: 300,
@@ -29,8 +30,9 @@ const useStyles = makeStyles({
   },
   notes:{
     marginTop: 40,
-    minWidth: 300,
-    maxWidth: 300,
+    minWidth: 310,
+    maxWidth: 310,
+    alignItems:'center'
   },
   table:{
     minWidth: 300
@@ -43,9 +45,17 @@ const useStyles = makeStyles({
 const UserPage = (props) => {
   useEffect(() => {props.dispatch({type: 'GET_ALL_NOTES'})},[])
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
+
+  //set up array of only heifer calves to display how many heifer calves we have
   useEffect(() => {setHeiferCalves(props.herd.filter(cow => cow.calf && !cow.archived && cow.gender === 'heifer'))},[props.herd]);
+
+  //set up array of only steer, or bull calves to display how many we have
   useEffect(() => {setBullCalves(props.herd.filter(cow => cow.calf && !cow.archived && cow.gender != 'heifer'))},[props.herd]);
+
+
   useEffect(() => {props.dispatch({ type: 'GET_HERD' })},[])
+
+  //set up an array of only cows and heifers so we can figure out percentage done calving
   useEffect(()=> {setTotalCows(props.herd.filter(cow => !cow.calf && !cow.archived && cow.gender != 'bull'))},[props.herd]);
   const [totalCows, setTotalCows] = useState([]);
   const [heiferCalves, setHeiferCalves] = useState([]);
@@ -105,10 +115,10 @@ const UserPage = (props) => {
           </Grid>
 
               {props.notes[0] && 
-                <Grid item xs={12}>
+                <Grid  item xs={12}>
                 <Paper className={classes.notes}>
               <Typography style={{ textAlign: 'center' }} className={classes.heading}>Recent Notes</Typography><hr style={{ marginLeft: 15, marginRight: 15 }}/>
-                  <TableContainer className={classes.container} >
+                  <TableContainer  className={classes.container} >
                     <Table stickyHeader className={classes.table}>
                       <TableHead>
                         <TableRow key='note-table'>

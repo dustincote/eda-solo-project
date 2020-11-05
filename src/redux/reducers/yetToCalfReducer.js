@@ -1,3 +1,5 @@
+
+// filters herd to new array that only includes cows who are yet to calf
 const yetToCalf = (state = [], action) => {
     
     if(action.type === 'SET_YET_TO_CALF'){

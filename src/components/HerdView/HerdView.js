@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
     },
     container: {
+        margin: 5,
         maxHeight: 440,
         width: 'auto',
         textAlign:'center',
@@ -111,6 +112,7 @@ const HerdView = (props) => {
                 </Paper>
                 <Button style={{ marginTop: 20,}} 
                         variant="contained"
+                        color="primary"
                         onClick={addAnimal}
                         >Add New Animal To Herd</Button>
             </Grid><br /><br />

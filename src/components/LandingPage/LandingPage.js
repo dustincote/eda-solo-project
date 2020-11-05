@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-
 import './LandingPage.css';
-
-// CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
 
 class LandingPage extends Component {

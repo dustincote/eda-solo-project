@@ -1,3 +1,6 @@
+
+
+//filters herd to a new array that only contains cows who have already calved
 const alreadyCalved = (state=[], action) => {
     if(action.type === 'SET_ALREADY_CALVED'){
         let calved = action.payload.filter(cow => cow.calf && !cow.archived).map(cow => Number(cow.dam_id));

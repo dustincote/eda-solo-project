@@ -12,7 +12,7 @@ import moment from 'moment';
 
 
 
-
+// each individual row of the pasture table
 const PastureTableItem = (props) => {
     const row = props.row
 
@@ -47,7 +47,7 @@ const PastureTableItem = (props) => {
                     style={{ fontSize: 10 }}
                     size="small"
                     variant="contained"
-                    color="default">
+                    color="primary">
                     Details
                 </Button>
             </TableCell>
@@ -57,7 +57,7 @@ const PastureTableItem = (props) => {
                     style={{ fontSize: 10 }}
                     size="small"
                     variant="contained"
-                    color="default">
+                    color="primary">
                     Remove
                 </Button>
             </TableCell>

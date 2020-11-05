@@ -14,6 +14,7 @@ import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import moment from 'moment';
 import swal from 'sweetalert';
+import Card from '@material-ui/core/Card';
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -118,7 +119,7 @@ const PastureView = (props) => {
       </div>
       <Grid container direction='column' spacing={4} alignItems='center' >
         <Grid item xs={12} style={{ textAlign: 'center' }}>
-
+      <Card style={{padding: 9}}>
           <form onSubmit={addToPasture}>
             {props.pastures &&
               <>
@@ -137,7 +138,7 @@ const PastureView = (props) => {
                   value={newPasture}
                   onChange={(e) => setNewPasture(e.target.value)} />
                 <br />
-                <Button style={{marginTop:10}} variant='contained' onClick={submitPasture}>Add Pasture</Button> </> : <></>}
+                <Button color='primary' style={{marginTop:10}} variant='contained' onClick={submitPasture}>Add Pasture</Button> </> : <></>}
             <br />
 
             {addPasture != true && <><TextField
@@ -163,8 +164,9 @@ const PastureView = (props) => {
                 control={<Radio color="primary" />}
                 label="Bull" />
             </RadioGroup><br />
-            <Button variant='contained' type='submit'>Add To {pasture.pasture_name} Pasture</Button></>}
+            <Button variant='contained' color='primary' type='submit'>Add To {pasture.pasture_name} Pasture</Button></>}
           </form>
+          </Card>
         </Grid>
         <Grid style={{ textAlign: 'center' }} item xs={12}>
           <PastureTable
