@@ -21,17 +21,15 @@ const useStyles = makeStyles({
     fontSize: 24,
   }, 
   container: {
-    margin: 5,
+    margin: 10,
     maxHeight: 300,
     width: 'auto',
-    minWidth: 300,
-    maxWidth: 300,
+
     textAlign: 'center',
   },
   notes:{
     marginTop: 40,
-    minWidth: 310,
-    maxWidth: 310,
+  width: 320,
     alignItems:'center'
   },
   table:{

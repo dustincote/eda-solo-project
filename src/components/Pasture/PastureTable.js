@@ -25,12 +25,12 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
     },
     container: {
-        margin: 5,
+        margin: 10,
         maxHeight: 440,
         width: 'auto',
         textAlign: 'center',
     },
-    table:{marginTop: 5},
+    table:{marginTop: 10},
     root: { width: 500 },
     grid: { marginBottom: 25 },
 }));
