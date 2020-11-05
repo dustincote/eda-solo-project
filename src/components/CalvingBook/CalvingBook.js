@@ -47,7 +47,7 @@ const CalvingBook = (props) => {
             {/* {console.log(rows())}
             {console.log(props)} */}
             <div style={{ textAlign: 'center', marginBottom: 40, marginLeft: 20, marginRight: 20 }}>
-                <h1>Calving Book</h1>
+                <h1 className='view-heading'>Calving Book</h1>
                 <hr />
             </div>
             <Grid

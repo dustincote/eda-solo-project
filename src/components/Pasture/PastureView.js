@@ -113,7 +113,7 @@ const PastureView = (props) => {
   return (
     <>
       <div style={{ textAlign: 'center', }}>
-        <h1>Pasture View</h1>
+        <h1 className='view-heading'>Pasture View</h1>
         <br />
         <hr />
       </div>

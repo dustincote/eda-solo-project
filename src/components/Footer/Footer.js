@@ -1,11 +1,9 @@
 import React ,{ useEffect, useState } from 'react';
-import mapStoreToProps from '../../redux/mapStoreToProps';
 import { connect } from 'react-redux';
 import './Footer.css';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 
@@ -86,7 +84,7 @@ return(
                 </Typography>
             </Card>}
         </Grid>
-            <Grid item style={{alignSelf:'flex-end'}}>
+            <Grid item style={{alignSelf:'flex-end', color:'white'}}>
                 &copy; Herdsman
             </Grid>
     </Grid>

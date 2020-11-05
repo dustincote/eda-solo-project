@@ -5,7 +5,10 @@ html, body, #react-root {
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
- background-color: #eeeeee;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 img {
@@ -125,4 +128,9 @@ input {
 
 .swal-text {
   text-align: center;
+}
+
+.view-heading{
+  color: white;
+  text-shadow: black 0px 0px 5px ;
 }

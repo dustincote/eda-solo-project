@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         textAlign: 'center',
     },
-    root: { width: 500, textAlign:'center' },
+    root: { width: 'auto', textAlign:'center', marginTop: 70 },
     grid: { marginBottom: 25 },
-    heading:{marginTop: 75, fontSize:18, marginBottom:10}
+    heading:{ fontSize:18, marginBottom:10}
 }));
 
 
@@ -52,8 +52,9 @@ const CloseToCalvingTable = (props) => {
         <>
             {/* {console.log(rows())}
             {console.log(props)} */}
-            <Typography className={classes.heading}>{rows.length} {props.heading}</Typography> 
             <Paper className={classes.root}>
+                <Typography className={classes.heading}>{rows.length} {props.heading}</Typography> 
+
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
