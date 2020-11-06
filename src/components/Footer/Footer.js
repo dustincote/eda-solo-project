@@ -65,7 +65,7 @@ return(
 
 
 <footer className={classes.root}>
-    <hr/>
+    {/* <hr/> */}
     <Grid container className={classes.root} justify='space-between' >
         <Grid item xs={2}>
             {props.weather.weather &&

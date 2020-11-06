@@ -6,7 +6,8 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
   background-image: url('/background.jpg');
-  background-size: cover;
+  /* Photo by Facai Wo on Unsplash */
+   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
@@ -130,7 +131,7 @@ input {
   text-align: center;
 }
 
-.view-heading{
+.view-heading {
   color: white;
-  text-shadow: black 0px 0px 5px ;
+  text-shadow: black 0px 0px 5px;
 }

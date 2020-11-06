@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
     },
     root: { width: 500 },
-    grid: { marginBottom: 25, },
+    grid: {},
 }));
 
 
@@ -51,16 +51,24 @@ const CalvingBook = (props) => {
                 <hr />
             </div>
             <Grid
-                className={classes.grid}
                 container
-                direction='column'
-                alignItems="center"
-                spacing={3}
+                justify='space-evenly'
             > 
- 
+                <Grid xs={10}   md={4} textAlign='center' className={classes.grid} >
+                    <Grid container direction="column" alignItems='center'>
             <CalvingBookTable  closeToCalving={props.closeToCalving} heading={'Close To Calving'} /> 
+            </Grid>
+                </Grid>
+                <Grid xs={10}   md={4} className={classes.grid}>
+                    <Grid container direction="column" alignItems='center'>
             <CalvingBookTable style={{ marginTop: 20 }} closeToCalving={props.yetToCalf} heading={'Not Close'} />
+                </Grid>
+                </Grid>
+                <Grid xs={10}   md={4} className={classes.grid}>
+                        <Grid container direction="column" alignItems='center'>
             <CalvingBookTable closeToCalving={props.alreadyCalved} heading={'Already Calved'} />
+                </Grid>
+                </Grid>
             </Grid>
         </>
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React,{ useEffect, useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
@@ -12,6 +12,24 @@ const Nav = (props) => {
     path: '/login',
     text: 'Login / Register',
   };
+  const [size, setSize]= useState(window.innerWidth);
+
+  const logOut = () => {
+    props.dispatch({ type: 'LOGOUT' });
+  }
+  useEffect(() => {
+    window.addEventListener('resize', sizeOfWindow);
+
+    // returned function will be called on component unmount 
+    return () => {
+      window.removeEventListener('resize', sizeOfWindow)
+    }
+  }, [])
+
+  const sizeOfWindow = () => {
+    console.log(window.innerWidth);
+    setSize(window.innerWidth);
+  }
 
   if (props.store.user.id != null) {
     loginLinkData.path = '/user';
@@ -25,7 +43,7 @@ const Nav = (props) => {
         <img id='logo' src='herdsman.png'/>
       </NavLink>
       </Grid>
-      <Grid item xs={10}>
+     {size > 640 && <Grid item xs={10}>
       <Grid container justify='flex-end' className="nav-right">
        
         <NavLink className="nav-link" to={loginLinkData.path}>
@@ -47,8 +65,7 @@ const Nav = (props) => {
             <NavLink className="nav-link" to="/pasture/">
               Pasture
             </NavLink>
-
-            <LogOutButton className="nav-link" />
+            <Link className="nav-link" onClick={logOut}>Log Out</Link>
           </>
         )}
         {/* Always show this link since the about page is not protected */}
@@ -56,7 +73,7 @@ const Nav = (props) => {
           About
         </NavLink>
         </Grid>
-      </Grid>
+      </Grid>}
     </Grid>
   );
 };

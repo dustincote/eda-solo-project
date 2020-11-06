@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         textAlign: 'center',
     },
-    root: { width: 'auto', textAlign:'center', marginTop: 70 },
+    root: { width: 'auto', minWidth: 300, maxWidth: 300, textAlign:'center', marginTop: 15},
     grid: { marginBottom: 25 },
     heading:{ fontSize:18, marginBottom:10}
 }));

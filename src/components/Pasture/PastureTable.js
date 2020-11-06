@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
     },
     table:{marginTop: 10},
-    root: { width: 500 },
+    root: { width: 'auto', minWidth:300, margin: 10, maxWidth: 450 },
     grid: { marginBottom: 25 },
 }));
 
@@ -48,8 +48,9 @@ const PastureTable = (props) => {
         <>
 
 
-           {props.heading && <><Typography>{rows.length} {props.heading}</Typography>
+           {props.heading && <>
             <Paper className={classes.root}>
+                    <Typography>{rows.length} {props.heading}</Typography>
                 <TableContainer className={classes.container}>
                     <Table className={classes.table}  stickyHeader aria-label="sticky table">
                         <TableHead>

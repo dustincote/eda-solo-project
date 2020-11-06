@@ -117,8 +117,8 @@ const PastureView = (props) => {
         <br />
         <hr />
       </div>
-      <Grid container direction='column' spacing={4} alignItems='center' >
-        <Grid item xs={12} style={{ textAlign: 'center' }}>
+      <Grid container direction='column'  alignItems='center' >
+        <Grid item xs={12} style={{ textAlign: 'center', marginBottom: 20 }}>
       <Card style={{padding: 9}}>
           <form onSubmit={addToPasture}>
             {props.pastures &&
@@ -168,26 +168,37 @@ const PastureView = (props) => {
           </form>
           </Card>
         </Grid>
-        <Grid style={{ textAlign: 'center' }} item xs={12}>
+        <Grid container justify='space-evenly' >
+        <Grid style={{ textAlign: 'center' }} item xs={10} sm={8} md={4}>
+          <Grid container direction='column' alignItems='center'>
           <PastureTable
+            style={{margin:5}}
             heading={pasture.pasture_name && `Cows/Heifers In ${pasture.pasture_name} Pasture`}
             className={classes.table}
             animals={props.pastureRecords.filter(cow => !cow.calf && cow.gender != 'bull' && cow.pasture_id === pasture.pasture_id)}
           />
         </Grid>
-        <Grid style={{ textAlign: 'center' }} item xs={12}>
+          </Grid>
+        <Grid style={{ textAlign: 'center' }} item xs={10} sm={8} md={4}>
+            <Grid container direction='column' alignItems='center'>
+
           <PastureTable
             heading={pasture.pasture_name && `Calves In ${pasture.pasture_name} Pasture `}
             className={classes.table}
             animals={props.pastureRecords.filter(cow => cow.calf && cow.pasture_id === pasture.pasture_id)}
           />
+          </Grid>
         </Grid>
-        <Grid style={{ textAlign: 'center' }} item xs={12}>
+        <Grid style={{ textAlign: 'center' }} item xs={10} sm={8} md={4}>
+              <Grid container direction='column' alignItems='center'>
+
           <PastureTable
             heading={pasture.pasture_name && `Bulls In ${pasture.pasture_name} Pasture`}
             className={classes.table}
             animals={props.pastureRecords.filter(cow => !cow.calf && cow.gender === 'bull' && cow.pasture_id === pasture.pasture_id)}
           />
+          </Grid>
+        </Grid>
         </Grid>
       </Grid>
     </>

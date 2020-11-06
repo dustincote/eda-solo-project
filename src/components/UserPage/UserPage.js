@@ -15,7 +15,8 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   card:{
-    minWidth: 300,
+    width: 320,
+    margin: 10,
   },
   heading:{
     fontSize: 24,
@@ -28,13 +29,14 @@ const useStyles = makeStyles({
     textAlign: 'center',
   },
   notes:{
-    marginTop: 40,
+    marginLeft: 10,
   width: 320,
     alignItems:'center'
   },
   table:{
     minWidth: 300
-  }
+  },
+  grid:{marginBottom: 15}
 })
 
 
@@ -65,12 +67,12 @@ const UserPage = (props) => {
 
         <div style={{ textAlign: 'center', marginBottom: 40, marginLeft: 20, marginRight: 20 }}>         
           <img src='herdsman.png' id='welcome-img'/>
-          <hr/>
+          {/* <hr/> */}
         </div>
-        <Grid container direction='column' alignItems='center' justify='center'   >
-          <Grid item xs={12}>
-            <Paper>
-          <Card variant='elevation' className={classes.card} style={{textAlign:'center'}}>
+        <Grid container alignItems='start' justify='space-evenly'  >
+          <Grid item xs={12} md={6} className={classes.grid}>
+            <Grid container direction='column' alignItems='center'>
+          <Card variant='elevation' className={classes.card} style={{textAlign:'center', marginRight: 5}}>
                 <Typography className={classes.heading}>
                 Calving Dashboard<br/>
             </Typography><hr style={{marginLeft: 15, marginRight: 15}}/>
@@ -109,11 +111,13 @@ const UserPage = (props) => {
               </Table>
             </TableContainer>
            </Card>
-            </Paper>
+            </Grid>
           </Grid>
 
               {props.notes[0] && 
-                <Grid  item xs={12}>
+                <Grid  item xs={12} sm={6} className={classes.grid}>
+            <Grid container direction='column' alignItems='center'>
+
                 <Paper className={classes.notes}>
               <Typography style={{ textAlign: 'center' }} className={classes.heading}>Recent Notes</Typography><hr style={{ marginLeft: 15, marginRight: 15 }}/>
                   <TableContainer  className={classes.container} >
@@ -143,6 +147,7 @@ const UserPage = (props) => {
                     </Table>
                   </TableContainer>
               </Paper>
+              </Grid>
                 </Grid>
             }
 
