@@ -66,7 +66,7 @@ const CalvingBook = (props) => {
                 </Grid>
                 <Grid item xs={10}   md={4} className={classes.grid}>
                         <Grid container direction="column" alignItems='center'>
-            <CalvingBookTable closeToCalving={props.alreadyCalved} heading={'Already Calved'} />
+            <CalvingBookTable closeToCalving={props.alreadyCalved} heading={'Already Calved'} details={true} />
                 </Grid>
                 </Grid>
             </Grid>

@@ -65,7 +65,7 @@ const CloseToCalvingTable = (props) => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows != undefined && rows.map(row => (<CalvingBookItem key={row.animal_id} row={row} />))}
+                                {rows != undefined && rows.map(row => (<CalvingBookItem key={row.animal_id} details={props.details} row={row} />))}
                             </TableBody>
                         </Table>
                     </TableContainer>

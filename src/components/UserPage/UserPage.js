@@ -29,7 +29,6 @@ const useStyles = makeStyles({
     textAlign: 'center',
   },
   notes:{
-    marginLeft: 10,
   width: 320,
     alignItems:'center'
   },

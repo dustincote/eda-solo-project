@@ -16,7 +16,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const CalvingBookItem = (props) => {
     const row = props.row
 
-
+const details = () => {
+    props.history.push(`/details/${row.animal_id}`)
+}
 
     const addCalf = () => {
         console.log(row)
@@ -48,7 +50,7 @@ const CalvingBookItem = (props) => {
                 </Button>
             </TableCell>
             <TableCell style={{ textAlign: 'center' }}>
-                <FormControlLabel
+                {props.details ? <Button size='small' variant='contained' color='primary' onClick={details}>Details</Button>:<FormControlLabel
                     label="Mark as Close"
                     labelPlacement="top"
                     style={{ textAlign: 'center', fontSize: 5, }}
@@ -59,7 +61,7 @@ const CalvingBookItem = (props) => {
                             checked={row.close_to_calving}
                             onChange={handleCheck}
                             name="close_to_calving"
-                        />} />
+                        />} />}
             </TableCell>
         </TableRow>
 
