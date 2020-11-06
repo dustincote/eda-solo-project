@@ -115,12 +115,12 @@ const CalfForm = (props) => {
             props.dispatch({type:'ADD_NOTE', payload:{note: cowNote, animal_id: dam_id, tag_number: dam[0].tag_number}});
         }
         props.dispatch({type: 'UPDATE_CLOSE_TO_CALVING', payload:{close_to_calving: false, animal_id: dam_id}})
-        props.history.push('/home')
+        props.history.goBack();
     };
    
 
     const goBack = () => {
-        props.history.goBack()
+        props.history.goBack();
     };
 
 
@@ -202,7 +202,6 @@ const CalfForm = (props) => {
                                         </Select>
                                     </FormControl><br /><br />
                                     <TextField fullWidth type='number' value={newCalf.birthweight} onChange={handleChange} name="birthweight"  label="Birthweight" /><br /><br />
-                                    <InputLabel style={{textAlign: 'left'}}>Calf Note</InputLabel>
                                     <TextField
                                         onChange={noteChange}
                                         fullWidth
@@ -213,7 +212,6 @@ const CalfForm = (props) => {
                                         variant="outlined"
                                         value={calfNote}
                                     /><br /><br />
-                                    <InputLabel style={{ textAlign: 'left' }}>Cow Note</InputLabel>
                                     <TextField
                                         onChange={cowNoteChange}
                                         fullWidth

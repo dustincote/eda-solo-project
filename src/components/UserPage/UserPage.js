@@ -72,25 +72,27 @@ const UserPage = (props) => {
           <Grid item xs={12} md={6} className={classes.grid}>
             <Grid container direction='column' alignItems='center'>
           <Card variant='elevation' className={classes.card} style={{textAlign:'center', marginRight: 5}}>
-                <Typography className={classes.heading}>
-                Calving Dashboard<br/>
-            </Typography><hr style={{marginLeft: 15, marginRight: 15}}/>
+
+              <Typography className={classes.heading}>
+                  Calving Dashboard<br/>
+              </Typography><hr style={{marginLeft: 15, marginRight: 15}}/>
 
               <Typography>
-              {((props.alreadyCalved.length / totalCows.length)*100).toFixed(2)+'%'} Done Calving<br/>
+                {totalCows.length === 0 ? '0%' : ((props.alreadyCalved.length / totalCows.length)*100).toFixed(2)+'%'} Done Calving<br/>
               </Typography>
 
-                <Typography>
+              <Typography>
                 {props.closeToCalving.length} Close To Calving<br/>
-                </Typography>
+              </Typography>
 
-                  <Typography>
+              <Typography>
                 {props.yetToCalf.length} Not Close To Calving<br/>
-                  </Typography>
+              </Typography>
 
-                    <Typography>
+              <Typography>
                 {props.alreadyCalved.length} Already Calved
               </Typography>
+              
             <TableContainer className={classes.container}>
               <Table className={classes.table}>
                 <TableHead>

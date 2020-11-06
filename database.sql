@@ -11,7 +11,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "pastures" (
 	"pasture_id" serial PRIMARY KEY,
-	"pasture_name" varchar(255) NOT NULL UNIQUE,
+	"pasture_name" varchar(255) NOT NULL,
 	"user_id" integer REFERENCES "user"
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE "animals" (
 	"sire_id" varchar(255),
 	"tag_number" varchar(255) NOT NULL,
 	"gender" varchar(75) NOT NULL,
-	"user_id" integer NOT NULL,
+	"user_id" integer REFRENCES "user",
 	"cull" BOOLEAN NOT NULL DEFAULT 'false',
 	"archived" BOOLEAN NOT NULL DEFAULT 'false',
 	"date_archived" DATE,

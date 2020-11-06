@@ -49,9 +49,8 @@
   float: right;
 }
 
-.small-menu {
-  float: right;
-}
+.small-menu:hover {
+background-color: maroon !important;}
 
 .nav-img {
   width: 18px;
