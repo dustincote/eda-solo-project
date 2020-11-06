@@ -169,21 +169,21 @@ function DetailsPage(props) {
                                 />} />}
                     </CardContent>
                     <CardActions>
+
                     </CardActions>
                 </Card>}
             </Grid>
             <div style={{ textAlign: 'center', marginTop: 20 }}>
-
                 {addNewNote ? <><TextField
-                style={{marginBottom: 15}}
+                    style={{ marginBottom: 15, backgroundColor:'white'}}
                     onChange={(event) => setNote(event.target.value)}
-                    id="outlined-multiline-static"
+                    id="contained-multiline-static"
                     label="Notes"
                     multiline
                     rows={4}
-                    variant="outlined"
+                    variant="filled"
                     value={note}
-                /><br />
+                /><br /><br />
                     <Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={submitNote}>Submit</Button>{'  '}
                     <Button style={{ fontSize: 10 }} size="small" variant='contained' onClick={cancelNote}>Cancel</Button></>
                     :
@@ -191,6 +191,7 @@ function DetailsPage(props) {
                         <Button variant='contained' style={{ fontSize: 10 }} size="small" onClick={backToHerd}><ArrowBackIcon style={{ fontSize: 15 }} /> Back</Button>{'  '}
                         <Button variant='contained' style={{ fontSize: 10 }} size="small" onClick={() => setAddNewNote(true)}>Add New Note</Button>
                     </>}
+
             </div>
         </>
     );
