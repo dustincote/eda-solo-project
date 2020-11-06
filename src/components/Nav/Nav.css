@@ -20,7 +20,6 @@
   margin-left: 20px;
 }
 
-
 .nav-link {
   float: left;
   color: black;
@@ -39,6 +38,7 @@
 
 .active {
   color: white;
+  background-color: maroon;
 }
 
 .nav-link:hover {
@@ -49,6 +49,14 @@
   float: right;
 }
 
-.small-menu{
+.small-menu {
   float: right;
+}
+
+.nav-img {
+  width: 18px;
+}
+
+.nav-icon {
+  color: black;
 }

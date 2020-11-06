@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import InfoIcon from '@material-ui/icons/Info';
 
 
 
@@ -68,27 +71,27 @@ const Nav = (props) => {
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
-          {loginLinkData.text}<br/>{loginLinkData.text === 'Home' && <HomeOutlined />}
+          {loginLinkData.text}<br/>{loginLinkData.text === 'Home' && <HomeOutlined className='nav-icon' fontSize='inherit' />}
         </NavLink>
 
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>
             <NavLink className="nav-link" to="/calvingbook">
-              CalvingBook
+              CalvingBook<br/> <MenuBookIcon className='nav-icon' fontSize='inherit' />
             </NavLink>
             <NavLink className="nav-link" to="/herd">
-              Herd
+              Herd<br/> <img className='nav-img' src='/cow_icon.png'/>
             </NavLink>
             <NavLink className="nav-link" to="/pasture/">
-              Pasture
+                Pasture<br/> <img className='nav-img' src="/grass.png"/>
             </NavLink>
-            <Link className="nav-link" to='/home' onClick={logOut}>Log Out</Link>
+              <Link className="nav-link" to='/home' onClick={logOut}>Log Out<br /> <ExitToAppIcon className='nav-icon' fontSize='inherit'/></Link>
           </>
         )}
         {/* Always show this link since the about page is not protected */}
         <NavLink className="nav-link" to="/about">
-          About
+            About<br /> <InfoIcon className='nav-icon' fontSize='inherit'/>
         </NavLink>
         </Grid>
       </Grid> :
