@@ -38,7 +38,7 @@ class LoginForm extends Component {
   render() {
     return (
       <Grid container justify='center' alignItems='center'>
-        <Grid xs={8} sm={5} md={4} lg={4} style={{textAlign:'center', margin: 15}}>
+        <Grid item xs={8} sm={5} md={4} lg={4} style={{textAlign:'center', margin: 15}}>
           <Card>
       <form  onSubmit={this.login}>
         <h2>Login</h2>

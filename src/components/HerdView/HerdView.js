@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         textAlign:'center',
     },
-    root: { width: 500 },
+    root: { width: 'auto' },
     grid: { marginBottom: 25, textAlign:'center' },
 }));
 
@@ -77,15 +77,17 @@ const HerdView = (props) => {
             {console.log(props)} */}
             <div style={{textAlign:'center', marginBottom:40, marginLeft:20, marginRight:20}}>                
                 <h1 className='view-heading'>Herd View</h1>
-                <hr/>
+                {/* <hr/> */}
             </div>
             <Grid
                 className={classes.grid}
                 container
-                direction='column'
+                direction='row'
                 alignItems="center"
+                justify='center'
                 spacing={0}
             >  
+            <Grid xs={10} sm={8} md={6} lg={4} item>
                 <Paper className={classes.root}>
                 <FormLabel>Select Filter</FormLabel><br/>
                 <Select style={{width: 'auto'}} value={filterHerd} onChange={(e) => setFilterHerd(e.target.value)}>
@@ -116,6 +118,7 @@ const HerdView = (props) => {
                         color="primary"
                         onClick={addAnimal}
                         >Add New Animal To Herd</Button>
+                </Grid>
             </Grid><br /><br />
             </>
 

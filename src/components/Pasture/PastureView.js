@@ -115,7 +115,7 @@ const PastureView = (props) => {
       <div style={{ textAlign: 'center', }}>
         <h1 className='view-heading'>Pasture View</h1>
         <br />
-        <hr />
+        {/* <hr /> */}
       </div>
       <Grid container direction='column'  alignItems='center' >
         <Grid item xs={12} style={{ textAlign: 'center', marginBottom: 20 }}>

@@ -43,7 +43,7 @@ const useStyles = makeStyles({
 
 
 const UserPage = (props) => {
-  useEffect(() => {props.dispatch({type: 'GET_ALL_NOTES'})},[])
+  useEffect(() => {props.dispatch({type: 'GET_ALL_NOTES'})},[]);
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, []);
 
   //set up array of only heifer calves to display how many heifer calves we have
@@ -69,7 +69,7 @@ const UserPage = (props) => {
           <img src='herdsman.png' id='welcome-img'/>
           {/* <hr/> */}
         </div>
-        <Grid container alignItems='start' justify='space-evenly'  >
+        <Grid container alignItems='flex-start' justify='space-evenly'  >
           <Grid item xs={12} md={6} className={classes.grid}>
             <Grid container direction='column' alignItems='center'>
           <Card variant='elevation' className={classes.card} style={{textAlign:'center', marginRight: 5}}>

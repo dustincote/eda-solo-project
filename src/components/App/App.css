@@ -7,7 +7,7 @@ body {
   margin: 0px;
   background-image: url('/background.jpg');
   /* Photo by Facai Wo on Unsplash */
-   background-size: cover;
+  background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
@@ -121,6 +121,7 @@ input {
 
 #welcome-img {
   width: 100px;
+  backdrop-filter: blur(2px);
 }
 
 #welcome {

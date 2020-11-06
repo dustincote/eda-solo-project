@@ -48,23 +48,23 @@ const CalvingBook = (props) => {
             {console.log(props)} */}
             <div style={{ textAlign: 'center', marginBottom: 40, marginLeft: 20, marginRight: 20 }}>
                 <h1 className='view-heading'>Calving Book</h1>
-                <hr />
+                {/* <hr /> */}
             </div>
             <Grid
                 container
                 justify='space-evenly'
             > 
-                <Grid xs={10}   md={4} textAlign='center' className={classes.grid} >
+                <Grid item xs={10}   md={4}  className={classes.grid} >
                     <Grid container direction="column" alignItems='center'>
             <CalvingBookTable  closeToCalving={props.closeToCalving} heading={'Close To Calving'} /> 
             </Grid>
                 </Grid>
-                <Grid xs={10}   md={4} className={classes.grid}>
+                <Grid item xs={10}   md={4} className={classes.grid}>
                     <Grid container direction="column" alignItems='center'>
             <CalvingBookTable style={{ marginTop: 20 }} closeToCalving={props.yetToCalf} heading={'Not Close'} />
                 </Grid>
                 </Grid>
-                <Grid xs={10}   md={4} className={classes.grid}>
+                <Grid item xs={10}   md={4} className={classes.grid}>
                         <Grid container direction="column" alignItems='center'>
             <CalvingBookTable closeToCalving={props.alreadyCalved} heading={'Already Calved'} />
                 </Grid>
