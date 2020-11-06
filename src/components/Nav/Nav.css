@@ -39,6 +39,7 @@
 .active {
   color: white;
   background-color: maroon;
+  fill: white;
 }
 
 .nav-link:hover {
@@ -56,6 +57,3 @@ background-color: maroon !important;}
   width: 18px;
 }
 
-.nav-icon {
-  color: black;
-}

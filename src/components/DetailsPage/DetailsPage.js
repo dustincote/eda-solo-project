@@ -122,8 +122,8 @@ function DetailsPage(props) {
     return (
         <>
             <div style={{ textAlign: 'center', marginBottom: 40, marginLeft: 20, marginRight: 20 }}>
-                <h1>Details for {animal[0] && animal[0].tag_number}</h1>
-                <hr />
+                <h1 className='view-heading'>Details for {animal[0] && animal[0].tag_number}</h1>
+                {/* <hr /> */}
             </div>
             <Grid container direction='column' justify='center' alignItems='center'>
                 {animal[0] && <Card className={classes.root}>

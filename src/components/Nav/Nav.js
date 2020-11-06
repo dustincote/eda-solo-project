@@ -12,6 +12,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import InfoIcon from '@material-ui/icons/Info';
+import Grass from '../Svg/grass';
+import Herdsman from '../Svg/herdsman';
+import CowIcon from '../Svg/CowIcon';
 
 
 
@@ -81,10 +84,11 @@ const Nav = (props) => {
               CalvingBook<br/> <MenuBookIcon className='nav-icon' fontSize='inherit' />
             </NavLink>
             <NavLink className="nav-link" to="/herd">
-              Herd<br/> <img className='nav-img' src='/cow_icon.png'/>
+              Herd<br/> <CowIcon className='nav-img' />
             </NavLink>
             <NavLink className="nav-link" to="/pasture/">
-                Pasture<br/> <img className='nav-img' src="/grass.png"/>
+                Pasture<br /><Grass className='nav-img' />
+
             </NavLink>
               <Link className="nav-link" to='/home' onClick={logOut}>Log Out<br /> <ExitToAppIcon className='nav-icon' fontSize='inherit'/></Link>
           </>
