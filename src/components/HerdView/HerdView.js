@@ -94,7 +94,7 @@ const HerdView = (props) => {
                     <MenuItem value={false}>All</MenuItem>
                     <MenuItem value="cow">Cows</MenuItem>
                     <MenuItem value="heifer">Heifers</MenuItem>
-                    <MenuItem value="bull">Bull</MenuItem>
+                    <MenuItem value="bull">Bulls</MenuItem>
                 </Select>
                 <h1>{rows().length} Animals</h1>
                 
